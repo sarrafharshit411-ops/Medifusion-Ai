@@ -1,0 +1,106 @@
+Disease,Immediate Symptom Relief (OTC),Symptom Relief (Alternative OTC),Additional Self-Care / Notes
+Influenza,"Acetaminophen or Ibuprofen (for Fever, Aches, Pains); Dextromethorphan (Cough Suppressant); Pseudoephedrine or Phenylephrine (Decongestant)",Guaifenesin (Expectorant for productive cough),Rest, hydration, and steam inhalation. Consult a doctor immediately for severe symptoms.
+Common Cold,"Acetaminophen or Ibuprofen (for Fever, Aches, Pains); Dextromethorphan (Cough Suppressant); Antihistamines (for Runny Nose, Sneezing)",Loratadine, Cetirizine (Non-drowsy Antihistamine),Rest, hydration, saline nasal spray, throat lozenges.
+Eczema,Topical Hydrocortisone Cream (low strength) or Calamine Lotion,Oral Antihistamines (e.g., Diphenhydramine for night-time itch),Moisturizers, avoid irritants, cool compresses.
+Asthma,"Epinephrine Inhaler (e.g., Primatene Mist - ONLY for mild, intermittent asthma and short-term use); Acetaminophen/Ibuprofen for associated pain",N/A (Asthma requires prescription inhalers for proper control),Avoid triggers. **Seek immediate medical attention if symptoms worsen or if breathing is severely difficult.** OTC inhalers are NOT a substitute for prescription medication.
+Hyperthyroidism,Acetaminophen or Ibuprofen (for general discomfort/aches),N/A,Rest, cool environment, hydration. This is a condition requiring urgent medical consultation.
+Allergic Rhinitis,"Loratadine, Cetirizine, or Fexofenadine (Oral Antihistamines); Fluticasone or Triamcinolone (Nasal Steroid Spray)",Pseudoephedrine or Phenylephrine (Decongestant),Avoid allergens, nasal rinsing with saline solution.
+Anxiety Disorders,Herbal teas (Chamomile, Lavender); Magnesium Supplements (general calming),N/A,Breathing exercises, rest, mindfulness. **This is a mental health condition; seek professional help.**
+Diabetes,Acetaminophen (for general pain/fever - *check with a doctor for NSAIDs use*),N/A,Hydration. Monitor blood sugar closely. Consult a doctor.
+Gastroenteritis,Oral Rehydration Solution (ORS) or Electrolyte Drink; Loperamide (Anti-diarrheal, if appropriate),Bismuth Subsalicylate (for upset stomach/diarrhea),Bland diet (BRAT), hydration.
+Pancreatitis,Acetaminophen (Pain relief - *avoid NSAIDs/Alcohol*),N/A,Clear liquids/fasting (under medical guidance). Requires immediate medical attention.
+Rheumatoid Arthritis,Ibuprofen or Naproxen (NSAIDs for pain/inflammation - *if no stomach issues*),Acetaminophen,Rest, ice/heat therapy. Requires ongoing medical care.
+Depression,"Magnesium Supplements, Omega-3 Fatty Acids (Adjunctive support)",N/A,Light exercise, rest, social support. **This is a mental health condition; seek professional help.**
+Liver Cancer,Acetaminophen (with extreme caution and low dose, or avoid entirely - *check with a doctor*),Ibuprofen or Naproxen (with caution),Rest, specialized diet (under medical guidance). Requires urgent medical attention.
+Stroke,Acetaminophen (for headache/fever - *AVOID Aspirin/NSAIDs unless directed*),N/A,Absolute rest. **Stroke is a medical emergency requiring 911/emergency services.**
+Urinary Tract Infection (UTI),"Phenazopyridine (for pain/burning relief only - *will not cure infection*)",Cranberry supplements,Increased fluid intake. Requires a doctor for antibiotics.
+Dengue Fever,Acetaminophen (for fever/pain - **ABSOLUTELY AVOID NSAIDs like Ibuprofen/Aspirin due to bleeding risk**),N/A,Rest, hydration. Requires medical monitoring.
+Hyperthyroidism,Acetaminophen or Ibuprofen (for general discomfort/aches),N/A,Rest, cool environment, hydration. This is a condition requiring urgent medical consultation.
+Allergic Rhinitis,Loratadine, Cetirizine, or Fexofenadine (Oral Antihistamines),Fluticasone or Triamcinolone (Nasal Steroid Spray),Avoid allergens, nasal rinsing with saline solution.
+Anxiety Disorders,Herbal teas (Chamomile, Lavender); Magnesium Supplements (general calming),N/A,Breathing exercises, rest, mindfulness. **This is a mental health condition; seek professional help.**
+Common Cold,Acetaminophen or Ibuprofen; Decongestants,Dextromethorphan (Cough Suppressant),Rest, hydration, saline nasal spray.
+Diabetes,Acetaminophen (for general pain/fever - *check with a doctor for NSAIDs use*),N/A,Hydration. Monitor blood sugar closely. Consult a doctor.
+Gastroenteritis,Oral Rehydration Solution (ORS) or Electrolyte Drink; Loperamide,Bismuth Subsalicylate,Bland diet (BRAT), hydration.
+Pancreatitis,Acetaminophen (Pain relief - *avoid NSAIDs/Alcohol*),N/A,Clear liquids/fasting (under medical guidance). Requires immediate medical attention.
+Rheumatoid Arthritis,Ibuprofen or Naproxen (NSAIDs for pain/inflammation),Acetaminophen,Rest, ice/heat therapy. Requires ongoing medical care.
+Depression,Magnesium Supplements, Omega-3 Fatty Acids (Adjunctive support),N/A,Light exercise, rest, social support. **This is a mental health condition; seek professional help.**
+Liver Cancer,Acetaminophen (with extreme caution and low dose, or avoid entirely),Ibuprofen or Naproxen (with caution),Rest, specialized diet (under medical guidance). Requires urgent medical attention.
+Stroke,Acetaminophen (for headache/fever - *AVOID Aspirin/NSAIDs unless directed*),N/A,Absolute rest. **Stroke is a medical emergency requiring 911/emergency services.**
+Urinary Tract Infection,Phenazopyridine (for pain/burning relief only),Cranberry supplements,Increased fluid intake. Requires a doctor for antibiotics.
+Dengue Fever,Acetaminophen (for fever/pain - **ABSOLUTELY AVOID NSAIDs like Ibuprofen/Aspirin**),N/A,Rest, hydration. Requires medical monitoring.
+Eczema,Topical Hydrocortisone Cream; Calamine Lotion,Oral Antihistamines,Moisturizers, avoid irritants, cool compresses.
+Hepatitis,Acetaminophen (with extreme caution and low dose, or avoid entirely),N/A,Rest, hydration, specialized diet. Requires urgent medical attention.
+Kidney Cancer,Acetaminophen (Pain relief - *check with a doctor for NSAIDs use*),N/A,Rest, hydration. Requires urgent medical attention.
+Migraine,"Ibuprofen, Naproxen, or Acetaminophen/Aspirin/Caffeine Combination",Antiemetics (e.g., Dimenhydrinate for nausea/vomiting),Dark, quiet room, cold pack on head/neck. Limit use to avoid rebound headaches.
+Muscular Dystrophy,Acetaminophen or Ibuprofen (for muscle pain),N/A,Gentle stretching, rest. Requires ongoing medical care.
+Sinusitis,Pseudoephedrine or Phenylephrine (Decongestant); Acetaminophen or Ibuprofen,Saline Nasal Rinse/Spray,Steam inhalation, hydration.
+Ulcerative Colitis,Loperamide (Anti-diarrheal - *use with caution in flares*),Bismuth Subsalicylate (for general upset),Low-fiber diet during flares, hydration. Requires ongoing medical care.
+Bipolar Disorder,Magnesium Supplements, Omega-3 Fatty Acids (Adjunctive support),N/A,Sleep hygiene, routine. **This is a mental health condition; seek professional help.**
+Bronchitis,"Acetaminophen or Ibuprofen; Guaifenesin (Expectorant); Dextromethorphan (Cough Suppressant)",Saline Nasal Spray,Steam inhalation, hydration, rest.
+Cerebral Palsy,Acetaminophen or Ibuprofen (for pain/discomfort),N/A,Physical therapy, rest. Requires ongoing medical care.
+Colorectal Cancer,Acetaminophen (Pain relief - *check with a doctor for NSAIDs use*),N/A,Hydration. Requires urgent medical attention.
+Hypertensive Heart Disease,Acetaminophen (for pain/fever - *AVOID decongestants like Pseudoephedrine*),N/A,Low-salt diet, rest. Requires ongoing medical care.
+Multiple Sclerosis,Acetaminophen or Ibuprofen (for pain/aches),N/A,Rest, cool temperatures. Requires ongoing medical care.
+Myocardial Infarction (Heart Attack),**EMERGENCY: Chewable Aspirin (325mg) immediately if not allergic, then CALL 911.**,N/A,Absolute rest. **THIS IS A MEDICAL EMERGENCY.**
+Osteoporosis,Acetaminophen (for pain),N/A,Calcium and Vitamin D supplements (long-term). Requires ongoing medical care.
+Pneumonia,"Acetaminophen or Ibuprofen; Dextromethorphan (Cough Suppressant); Guaifenesin (Expectorant)",N/A,Rest, hydration, steam inhalation. Requires urgent medical attention for antibiotics.
+Atherosclerosis,Acetaminophen (Pain relief),N/A,Low-fat diet, light exercise (if approved by doctor). Requires ongoing medical care.
+Chronic Obstructive Pulmonary Disease (COPD),Acetaminophen or Ibuprofen; Guaifenesin (Expectorant),N/A,Pursed-lip breathing, rest. **Avoid all OTC decongestants unless cleared by a doctor.** Requires ongoing medical care.
+Epilepsy,Acetaminophen or Ibuprofen (for associated headache/pain),N/A,Avoid triggers (e.g., sleep deprivation, alcohol). Requires ongoing medical care.
+Hypertension,Acetaminophen (for pain/fever - *AVOID decongestants like Pseudoephedrine*),N/A,Low-salt diet, rest. Monitor blood pressure.
+Obsessive-Compulsive Disorder (OCD),Magnesium Supplements, Herbal Teas,N/A,Deep breathing, structured routine. **This is a mental health condition; seek professional help.**
+Psoriasis,Topical Hydrocortisone Cream (low strength); Coal Tar or Salicylic Acid products,Emollients/heavy moisturizers,Cool baths, gentle cleansing.
+Rubella,Acetaminophen or Ibuprofen (for fever/aches),Oral Antihistamines (for itch),Rest, hydration.
+Cirrhosis,Acetaminophen (with **extreme caution** and low dose, or avoid entirely),N/A,Rest, specialized diet (under medical guidance). Requires urgent medical attention.
+Conjunctivitis (Pink Eye),Artificial Tears (lubricating eye drops),Cool Compresses,Avoid touching eyes, proper hand hygiene.
+Gout,Ibuprofen or Naproxen (NSAIDs for pain/inflammation - *if no stomach issues*),Acetaminophen,Rest, ice pack on joint. Requires ongoing medical care.
+Malaria,Acetaminophen (for fever/pain - **ABSOLUTELY AVOID NSAIDs/Aspirin**),N/A,Rest, hydration. Requires urgent medical attention.
+Spina Bifida,Acetaminophen or Ibuprofen (for pain/discomfort),N/A,Comfort measures, rest. Requires ongoing medical care.
+Urinary Tract Infection,Phenazopyridine (for pain/burning relief only),Cranberry supplements,Increased fluid intake. Requires a doctor for antibiotics.
+Kidney Disease,Acetaminophen (for pain/fever - *AVOID NSAIDs like Ibuprofen/Naproxen*),N/A,Low-protein, low-salt diet. Requires ongoing medical care.
+Osteoarthritis,Acetaminophen (First choice for pain); Ibuprofen or Naproxen (for inflammation),Topical Pain Relief (e.g., Capsaicin, Menthol),Heat/cold therapy, gentle exercise, weight management.
+Klinefelter Syndrome,Acetaminophen or Ibuprofen (for general discomfort),N/A,Requires ongoing medical care.
+Acne,Benzoyl Peroxide or Salicylic Acid (Topical),N/A,Gentle cleansing, avoid touching face.
+Brain Tumor,Acetaminophen (Pain relief - *Consult a doctor for severe headaches*),N/A,Rest, minimize straining. Requires urgent medical attention.
+Cystic Fibrosis,Acetaminophen or Ibuprofen; Guaifenesin (Expectorant),N/A,Chest physical therapy, hydration. Requires ongoing medical care.
+Glaucoma,Acetaminophen or Ibuprofen (for pain - *AVOID certain cold/flu medicines with decongestants*),N/A,Requires urgent medical attention for eye pressure.
+Rabies,Acetaminophen (Pain relief),N/A,Requires immediate emergency medical attention (post-exposure prophylaxis).
+Chickenpox,Acetaminophen (for fever/pain - *AVOID Ibuprofen/NSAIDs in children due to rare risk of secondary infection*),Calamine Lotion or Oatmeal Baths (for itch),Cool compresses, anti-itch creams.
+Coronary Artery Disease,Acetaminophen (Pain relief - *avoid NSAIDs/decongestants*),N/A,Rest. Requires ongoing medical care. **Chest pain is a medical emergency.**
+Eating Disorders (Anorexia...),Magnesium Supplements, Herbal Teas,N/A,Immediate nutritional and psychological support. **This is a mental health condition; seek professional help.**
+Fibromyalgia,Acetaminophen or Ibuprofen (for pain/aches),Magnesium Supplements,Gentle exercise, heat therapy, rest.
+Hemophilia,Acetaminophen (for pain/fever - **AVOID Aspirin/NSAIDs due to bleeding risk**),N/A,Rest, ice (if external injury). Requires ongoing medical care.
+Hypoglycemia,Glucose Tablets or High-Sugar Snack (e.g., fruit juice, candy),N/A,Requires immediate treatment of low blood sugar.
+Lymphoma,Acetaminophen or Ibuprofen (for associated fever/pain),N/A,Rest, hydration. Requires ongoing medical care.
+Tuberculosis,Acetaminophen or Ibuprofen (for fever/pain/cough),Dextromethorphan (Cough Suppressant),Rest, hydration. Requires ongoing medical care and is highly contagious.
+Hypothyroidism,Acetaminophen or Ibuprofen (for pain/aches),N/A,Rest. Requires ongoing medical care.
+Pneumocystis Pneumonia (PCP),Acetaminophen or Ibuprofen,N/A,Rest, hydration. Requires urgent medical attention.
+Scoliosis,Acetaminophen or Ibuprofen (for back pain),Topical Pain Relief,Gentle stretching, proper posture. Requires ongoing medical care.
+Sickle Cell Anemia,Acetaminophen or Ibuprofen (for pain - *check with doctor*),N/A,Hydration, warmth, rest. Requires ongoing medical care.
+Tetanus,Acetaminophen (Pain relief),N/A,Requires urgent medical attention (vaccine/antitoxin).
+Appendicitis,Acetaminophen (Pain relief - *AVOID Ibuprofen/NSAIDs*),N/A,Nothing by mouth. **Appendicitis is a medical emergency; seek immediate care.**
+Esophageal Cancer,Acetaminophen (Pain relief),N/A,Soft diet, hydration. Requires urgent medical attention.
+HIV/AIDS,Acetaminophen or Ibuprofen (for associated fever/pain),N/A,Rest, hydration. Requires ongoing medical care.
+Marfan Syndrome,Acetaminophen or Ibuprofen (for pain),N/A,Requires ongoing medical care.
+Parkinson's Disease,Acetaminophen or Ibuprofen (for pain/aches),N/A,Gentle exercise, rest. Requires ongoing medical care.
+Polycystic Ovary Syndrome (PCOS),Acetaminophen or Ibuprofen (for pain),N/A,Diet and lifestyle changes. Requires ongoing medical care.
+Systemic Lupus Erythematosus (SLE),Acetaminophen or Ibuprofen (for joint/muscle pain),N/A,Rest, sun avoidance. Requires ongoing medical care.
+Typhoid Fever,Acetaminophen (for fever/pain - **AVOID NSAIDs/Aspirin**),N/A,Rest, hydration. Requires urgent medical attention.
+Breast Cancer,Acetaminophen (Pain relief),N/A,Rest, emotional support. Requires urgent medical attention.
+Measles,Acetaminophen or Ibuprofen (for fever/aches),N/A,Rest, hydration, dim lights (for light sensitivity).
+Osteomyelitis,Acetaminophen or Ibuprofen (Pain relief),N/A,Requires urgent medical attention for antibiotics.
+Polio,Acetaminophen or Ibuprofen (for fever/aches),N/A,Rest, gentle physical therapy. Requires ongoing medical care.
+Chronic Kidney Disease,Acetaminophen (for pain/fever - *AVOID NSAIDs like Ibuprofen/Naproxen*),N/A,Low-protein, low-salt diet. Requires ongoing medical care.
+Hepatitis B,Acetaminophen (with extreme caution and low dose, or avoid entirely),N/A,Rest, hydration. Requires ongoing medical care.
+Prader-Willi Syndrome,Acetaminophen or Ibuprofen (for general discomfort),N/A,Requires ongoing medical care.
+Thyroid Cancer,Acetaminophen (Pain relief),N/A,Requires urgent medical attention.
+Alzheimer's Disease,Acetaminophen or Ibuprofen (for general discomfort/pain),N/A,Routine, calm environment. Requires ongoing medical care.
+Bladder Cancer,Acetaminophen (Pain relief),N/A,Hydration. Requires urgent medical attention.
+Otitis Media (Ear Infection),Acetaminophen or Ibuprofen (for pain/fever),N/A,Warm compress on ear.
+Tourette Syndrome,Acetaminophen or Ibuprofen (for associated pain),N/A,Stress management. Requires ongoing medical care.
+Cholecystitis,Acetaminophen (Pain relief - *AVOID NSAIDs*),N/A,Low-fat diet. Requires urgent medical attention.
+Prostate Cancer,Acetaminophen (Pain relief),N/A,Requires ongoing medical care.
+Schizophrenia,Magnesium Supplements (Adjunctive support),N/A,Structured routine. **This is a mental health condition; seek professional help.**
+Testicular Cancer,Acetaminophen (Pain relief),N/A,Requires urgent medical attention.
+Tonsillitis,Acetaminophen or Ibuprofen (for sore throat/fever),Throat lozenges,Warm salt water gargle, soft diet, hydration.
+Williams Syndrome,Acetaminophen or Ibuprofen (for general discomfort),N/A,Requires ongoing medical care.

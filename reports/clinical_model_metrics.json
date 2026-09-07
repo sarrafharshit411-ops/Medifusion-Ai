@@ -1,0 +1,71 @@
+{
+  "model": "XGBoost",
+  "dataset": "Symptom + Synthetic Clinical",
+  "classes": [
+    "Malaria",
+    "Pneumonia",
+    "Typhoid"
+  ],
+  "num_features": 22,
+  "feature_names": [
+    "fever",
+    "cough",
+    "headache",
+    "nausea",
+    "vomiting",
+    "fatigue",
+    "sore_throat",
+    "chills",
+    "body_pain",
+    "loss_of_appetite",
+    "abdominal_pain",
+    "diarrhea",
+    "sweating",
+    "rapid_breathing",
+    "dizziness",
+    "age",
+    "temperature",
+    "heart_rate",
+    "bp_systolic",
+    "bp_diastolic",
+    "respiratory_rate",
+    "oxygen_saturation"
+  ],
+  "clinical_features_note": "SYNTHETIC - generated from symptom correlations for demonstration",
+  "train_size": 3998,
+  "test_size": 1000,
+  "test_accuracy": 0.871,
+  "classification_report": {
+    "Malaria": {
+      "precision": 0.8384146341463414,
+      "recall": 0.8258258258258259,
+      "f1-score": 0.8320726172465961,
+      "support": 333.0
+    },
+    "Pneumonia": {
+      "precision": 0.9017857142857143,
+      "recall": 0.9099099099099099,
+      "f1-score": 0.905829596412556,
+      "support": 333.0
+    },
+    "Typhoid": {
+      "precision": 0.8720238095238095,
+      "recall": 0.8772455089820359,
+      "f1-score": 0.8746268656716418,
+      "support": 334.0
+    },
+    "accuracy": 0.871,
+    "macro avg": {
+      "precision": 0.8707413859852885,
+      "recall": 0.8709937482392572,
+      "f1-score": 0.8708430264435979,
+      "support": 1000.0
+    },
+    "weighted avg": {
+      "precision": 0.870742668408827,
+      "recall": 0.871,
+      "f1-score": 0.8708468102828261,
+      "support": 1000.0
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "Image-Only": {
+    "model": "Image (ResNet18)",
+    "accuracy": 0.8509615384615384,
+    "precision_macro": 0.8981138866892232,
+    "recall_macro": 0.802991452991453,
+    "f1_macro": 0.8237989257661279,
+    "roc_auc": 0.9539612097304406,
+    "pr_auc": 0.9656111157034849,
+    "per_class": {
+      "NORMAL": {
+        "precision": 0.9862068965517241,
+        "recall": 0.6111111111111112,
+        "f1": 0.7546174142480211,
+        "support": 234.0
+      },
+      "PNEUMONIA": {
+        "precision": 0.8100208768267223,
+        "recall": 0.9948717948717949,
+        "f1": 0.8929804372842347,
+        "support": 390.0
+      }
+    }
+  },
+  "Symptom-Only": {
+    "model": "Symptom (XGBoost)",
+    "accuracy": 0.872,
+    "precision_macro": 0.8721178854412388,
+    "recall_macro": 0.8719917522312732,
+    "f1_macro": 0.8720454477518,
+    "roc_auc": 0.969107225666446,
+    "pr_auc": 0.9432515672670925,
+    "per_class": {
+      "Malaria": {
+        "precision": 0.8383233532934131,
+        "recall": 0.8408408408408409,
+        "f1": 0.8395802098950524,
+        "support": 333.0
+      },
+      "Pneumonia": {
+        "precision": 0.9030303030303031,
+        "recall": 0.8948948948948949,
+        "f1": 0.8989441930618401,
+        "support": 333.0
+      },
+      "Typhoid": {
+        "precision": 0.875,
+        "recall": 0.8802395209580839,
+        "f1": 0.8776119402985074,
+        "support": 334.0
+      }
+    }
+  },
+  "Clinical-Only": {
+    "model": "Clinical (XGBoost)",
+    "accuracy": 0.871,
+    "precision_macro": 0.8707413859852885,
+    "recall_macro": 0.8709937482392572,
+    "f1_macro": 0.8708430264435979,
+    "roc_auc": 0.9709141873112284,
+    "pr_auc": 0.9433742243833683,
+    "per_class": {
+      "Malaria": {
+        "precision": 0.8384146341463414,
+        "recall": 0.8258258258258259,
+        "f1": 0.8320726172465961,
+        "support": 333.0
+      },
+      "Pneumonia": {
+        "precision": 0.9017857142857143,
+        "recall": 0.9099099099099099,
+        "f1": 0.905829596412556,
+        "support": 333.0
+      },
+      "Typhoid": {
+        "precision": 0.8720238095238095,
+        "recall": 0.8772455089820359,
+        "f1": 0.8746268656716418,
+        "support": 334.0
+      }
+    }
+  }
+}

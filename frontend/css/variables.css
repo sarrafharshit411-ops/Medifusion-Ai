@@ -1,0 +1,116 @@
+/* ══════════════════════════════════════════════════════════════════
+   MediFusion AI — Design System Design Tokens & Variables
+   Aesthetic: Clean Clinical Light Theme / Modern Healthcare AI
+   Crisp Medical White, Sapphire & Sky Cyan Accents, Pristine Surfaces
+   ══════════════════════════════════════════════════════════════════ */
+
+:root {
+    /* ─── Color Hierarchy (Clinical Light Theme) ─── */
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
+    --bg-tertiary: #e2e8f0;
+    --bg-surface: rgba(255, 255, 255, 0.94);
+    --bg-surface-elevated: #ffffff;
+    --bg-surface-glass: rgba(255, 255, 255, 0.88);
+    --bg-surface-active: #f0f9ff;
+    --bg-input: #ffffff;
+
+    /* ─── Accent & Semantic Palette (Medical Blue / Cyan) ─── */
+    --accent-blue: #0284c7;
+    --accent-blue-bright: #0ea5e9;
+    --accent-blue-deep: #0369a1;
+    --accent-blue-glow: rgba(14, 165, 233, 0.25);
+    --accent-blue-dim: rgba(14, 165, 233, 0.1);
+    --accent-blue-subtle: rgba(14, 165, 233, 0.05);
+
+    --accent-teal: #0d9488;
+    --accent-teal-bright: #14b8a6;
+    --accent-teal-glow: rgba(13, 148, 136, 0.2);
+    --accent-teal-dim: rgba(13, 148, 136, 0.1);
+    --accent-teal-subtle: rgba(13, 148, 136, 0.04);
+
+    --accent-cyan: #0284c7;
+    --accent-cyan-glow: rgba(2, 132, 199, 0.22);
+    --accent-cyan-dim: rgba(2, 132, 199, 0.08);
+
+    --accent-violet: #6366f1;
+    --accent-indigo: #4f46e5;
+    --accent-violet-glow: rgba(99, 102, 241, 0.2);
+    --accent-violet-dim: rgba(99, 102, 241, 0.08);
+
+    --accent-gold: #d97706;
+    --accent-gold-bright: #f59e0b;
+    --accent-gold-glow: rgba(245, 158, 11, 0.18);
+    --accent-gold-dim: rgba(245, 158, 11, 0.08);
+
+    /* Semantic States */
+    --success: #059669;
+    --success-dim: rgba(5, 150, 105, 0.1);
+    --warning: #d97706;
+    --warning-dim: rgba(217, 119, 6, 0.1);
+    --danger: #e11d48;
+    --danger-dim: rgba(225, 29, 72, 0.1);
+    --danger-glow: rgba(225, 29, 72, 0.2);
+    --info: #0284c7;
+    --info-dim: rgba(2, 132, 199, 0.1);
+
+    /* ─── Typography & Neutral Contrast — HIGH VISIBILITY ─── */
+    --text-primary: #080c15;
+    --text-secondary: #0f1729;
+    --text-muted: #1a2540;
+    --text-dim: #253352;
+    --text-caption: #2f3f5c;
+    --text-highlight: #0260a0;
+
+    /* ─── Borders & Dividers (Clean, Defined Clinical Lines) ─── */
+    --border-subtle: #d1d9e6;
+    --border-normal: #b8c4d4;
+    --border-strong: #8494a7;
+    --border-accent: rgba(14, 165, 233, 0.5);
+    --border-accent-violet: rgba(99, 102, 241, 0.5);
+    --border-danger: rgba(225, 29, 72, 0.45);
+
+    /* ─── Shadows & Elevation (Soft, High-end Diffused) ─── */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 14px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 12px 30px -4px rgba(0, 0, 0, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.04);
+    --shadow-glow: 0 0 25px rgba(14, 165, 233, 0.2);
+    --shadow-glow-violet: 0 0 25px rgba(99, 102, 241, 0.18);
+    --shadow-glow-gold: 0 0 25px rgba(245, 158, 11, 0.18);
+    --shadow-glow-danger: 0 0 25px rgba(225, 29, 72, 0.18);
+
+    /* ─── Gradients ─── */
+    --gradient-premium: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #0d9488 100%);
+    --gradient-hero-mesh: radial-gradient(ellipse 80% 50% at 30% 20%, rgba(14, 165, 233, 0.08) 0%, transparent 60%),
+                          radial-gradient(ellipse 60% 60% at 75% 60%, rgba(13, 148, 136, 0.06) 0%, transparent 55%),
+                          radial-gradient(ellipse 50% 40% at 50% 90%, rgba(2, 132, 199, 0.05) 0%, transparent 50%);
+    --gradient-card-border: linear-gradient(135deg, rgba(14, 165, 233, 0.4), rgba(99, 102, 241, 0.3), rgba(13, 148, 136, 0.35));
+    --gradient-gold-badge: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(217, 119, 6, 0.06));
+
+    /* ─── Layout Geometry ─── */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 28px;
+    --radius-full: 9999px;
+
+    --header-height: 74px;
+    --container-max: 1360px;
+    --container-wide: 1540px;
+
+    /* ─── Transitions & Micro-Interactions ─── */
+    --ease-out-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-fast: 160ms var(--ease-out-smooth);
+    --transition-normal: 260ms var(--ease-out-smooth);
+    --transition-slow: 450ms var(--ease-out-smooth);
+    --transition-premium: 600ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* ─── Animation Durations ─── */
+    --anim-stagger-delay: 80ms;
+    --anim-shimmer-speed: 2.5s;
+    --anim-float-speed: 6s;
+    --anim-pulse-speed: 3s;
+}

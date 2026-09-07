@@ -1,0 +1,10 @@
+{
+  "concat": {
+    "best_val_accuracy": 0.972809667673716,
+    "model_path": "C:\\Users\\vansh\\OneDrive - BENNETT UNIVERSITY\\Desktop\\imd project\\models\\fusion_concat.pth"
+  },
+  "gated": {
+    "best_val_accuracy": 0.9707955689828801,
+    "model_path": "C:\\Users\\vansh\\OneDrive - BENNETT UNIVERSITY\\Desktop\\imd project\\models\\fusion_gated.pth"
+  }
+}

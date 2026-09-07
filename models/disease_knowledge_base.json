@@ -1,0 +1,516 @@
+{
+  "(vertigo) Paroymsal  Positional Vertigo": {
+    "disease": "(vertigo) Paroymsal  Positional Vertigo",
+    "specialist": "ENT Specialist / Neurologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a ENT Specialist / Neurologist.",
+    "primary_medications": "Consult a doctor for specific head maneuvers like the Epley maneuver. Avoid sudden movements.",
+    "immediate_symptom_relief": "Consult a doctor for specific head maneuvers like the Epley maneuver. Avoid sudden movements.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "AIDS": {
+    "disease": "AIDS",
+    "specialist": "Infectious Disease Specialist / Immunologist",
+    "triage_level": "CHRONIC SERIOUS",
+    "triage_color": "#a855f7",
+    "triage_action": "Lifelong antiretroviral therapy (ART) and CD4/viral load monitoring under specialist care.",
+    "primary_medications": "This is a serious condition requiring lifelong antiretroviral therapy (ART) under the supervision of a healthcare professional.",
+    "immediate_symptom_relief": "Acetaminophen or Ibuprofen (for associated fever/pain)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Acne": {
+    "disease": "Acne",
+    "specialist": "Dermatologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Dermatologist.",
+    "primary_medications": "Maintain good skin hygiene. Use over-the-counter topical treatments with benzoyl peroxide or salicylic acid. Consult a dermatologist if persistent.",
+    "immediate_symptom_relief": "Benzoyl Peroxide or Salicylic Acid (Topical)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Gentle cleansing",
+    "contraindications_warnings": []
+  },
+  "Alcoholic hepatitis": {
+    "disease": "Alcoholic hepatitis",
+    "specialist": "Hepatologist / Addiction Specialist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Addiction Specialist.",
+    "primary_medications": "Immediately stop all alcohol consumption. This is a serious condition that requires urgent medical care and a long-term management plan.",
+    "immediate_symptom_relief": "Acetaminophen (with extreme caution and low dose",
+    "alternative_relief": "or avoid entirely)",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "Strictly avoid all alcohol and hepatotoxic substances. Avoid excessive acetaminophen/paracetamol."
+    ]
+  },
+  "Allergy": {
+    "disease": "Allergy",
+    "specialist": "Allergist / Immunologist",
+    "triage_level": "MILD TO MODERATE",
+    "triage_color": "#10b981",
+    "triage_action": "Antihistamines, trigger avoidance. Seek urgent care if throat tightness occurs.",
+    "primary_medications": "Over-the-counter antihistamines like Cetirizine or Loratadine can help. Identify and avoid known allergens.",
+    "immediate_symptom_relief": "Over-the-counter antihistamines like Cetirizine or Loratadine can help. Identify and avoid known allergens.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Arthritis": {
+    "disease": "Arthritis",
+    "specialist": "Rheumatologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Rheumatologist.",
+    "primary_medications": "Over-the-counter pain relievers (NSAIDs like Ibuprofen). Gentle exercise and physical therapy can also help manage symptoms. Consult a doctor.",
+    "immediate_symptom_relief": "Ibuprofen or Naproxen (NSAIDs for pain/inflammation)",
+    "alternative_relief": "Acetaminophen",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Bronchial Asthma": {
+    "disease": "Bronchial Asthma",
+    "specialist": "Pulmonologist / Allergist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Pulmonologist / Allergist.",
+    "primary_medications": "Use prescribed inhalers as directed by your doctor. Identify and avoid triggers. Seek medical help for a long-term management plan.",
+    "immediate_symptom_relief": "Epinephrine Inhaler (e.g., Primatene Mist - ONLY for mild, intermittent asthma and short-term use); Acetaminophen/Ibuprofen for associated pain",
+    "alternative_relief": "N/A (Asthma requires prescription inhalers for proper control)",
+    "self_care_lifestyle": "Avoid triggers. **Seek immediate medical attention if symptoms worsen or if breathing is severely difficult.** OTC inhalers are NOT a substitute for prescription medication.",
+    "contraindications_warnings": []
+  },
+  "Cervical spondylosis": {
+    "disease": "Cervical spondylosis",
+    "specialist": "Orthopedic Surgeon / Neurologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Orthopedic Surgeon / Neurologist.",
+    "primary_medications": "Gentle neck exercises, maintaining good posture, and over-the-counter pain relievers can help. Consult a doctor or physical therapist.",
+    "immediate_symptom_relief": "Gentle neck exercises, maintaining good posture, and over-the-counter pain relievers can help. Consult a doctor or physical therapist.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Chicken pox": {
+    "disease": "Chicken pox",
+    "specialist": "General Physician / Pediatrician",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a General Physician / Pediatrician.",
+    "primary_medications": "Keep the skin cool and clean to reduce itching. Use calamine lotion or take oatmeal baths. Avoid scratching to prevent scarring.",
+    "immediate_symptom_relief": "Acetaminophen (for fever/pain - *AVOID Ibuprofen/NSAIDs in children due to rare risk of secondary infection*)",
+    "alternative_relief": "Calamine Lotion or Oatmeal Baths (for itch)",
+    "self_care_lifestyle": "Cool compresses",
+    "contraindications_warnings": []
+  },
+  "Chronic cholestasis": {
+    "disease": "Chronic cholestasis",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "This requires diagnosis and treatment of the underlying cause by a doctor. Do not self-medicate.",
+    "immediate_symptom_relief": "This requires diagnosis and treatment of the underlying cause by a doctor. Do not self-medicate.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Common Cold": {
+    "disease": "Common Cold",
+    "specialist": "General Physician / Primary Care",
+    "triage_level": "MILD / SELF-LIMITING",
+    "triage_color": "#10b981",
+    "triage_action": "Supportive care, hydration, rest, OTC symptom relief.",
+    "primary_medications": "Get plenty of rest, stay hydrated with fluids, and use over-the-counter decongestants or pain relievers for symptoms.",
+    "immediate_symptom_relief": "Acetaminophen or Ibuprofen; Decongestants",
+    "alternative_relief": "Dextromethorphan (Cough Suppressant)",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Dengue": {
+    "disease": "Dengue",
+    "specialist": "Infectious Disease Specialist / Hematologist",
+    "triage_level": "HIGH / MONITOR",
+    "triage_color": "#f97316",
+    "triage_action": "Immediate medical consultation and serial platelet monitoring required. AVOID NSAIDs/Aspirin.",
+    "primary_medications": "Rest and drink plenty of fluids. Use Paracetamol (Acetaminophen) for fever. Avoid NSAIDs like Ibuprofen and Aspirin. See a doctor immediately.",
+    "immediate_symptom_relief": "Acetaminophen (for fever/pain - **ABSOLUTELY AVOID NSAIDs like Ibuprofen/Aspirin**)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": [
+      "ABSOLUTELY AVOID NSAIDs (Ibuprofen, Aspirin, Naproxen) as they dramatically increase internal hemorrhage/bleeding risk."
+    ]
+  },
+  "Diabetes": {
+    "disease": "Diabetes",
+    "specialist": "General Physician / Internist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Medical Specialist.",
+    "primary_medications": "Requires a comprehensive management plan from a doctor, including diet, exercise, and possibly medication like insulin or metformin.",
+    "immediate_symptom_relief": "Acetaminophen (for general pain/fever - *check with a doctor for NSAIDs use*)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Hydration. Monitor blood sugar closely. Consult a doctor.",
+    "contraindications_warnings": []
+  },
+  "Dimorphic hemmorhoids(piles)": {
+    "disease": "Dimorphic hemmorhoids(piles)",
+    "specialist": "Colorectal Surgeon / Proctologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Colorectal Surgeon / Proctologist.",
+    "primary_medications": "Increase fiber and fluid intake to soften stools. Over-the-counter creams can help with discomfort. Consult a doctor if symptoms persist.",
+    "immediate_symptom_relief": "Increase fiber and fluid intake to soften stools. Over-the-counter creams can help with discomfort. Consult a doctor if symptoms persist.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Drug Reaction": {
+    "disease": "Drug Reaction",
+    "specialist": "Dermatologist / Allergist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Dermatologist / Allergist.",
+    "primary_medications": "Stop taking the suspected medication immediately and consult the prescribing doctor or seek emergency care if the reaction is severe.",
+    "immediate_symptom_relief": "Stop taking the suspected medication immediately and consult the prescribing doctor or seek emergency care if the reaction is severe.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Fungal infection": {
+    "disease": "Fungal infection",
+    "specialist": "Dermatologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Dermatologist.",
+    "primary_medications": "Use over-the-counter antifungal creams or powders. Keep the affected area clean and dry.",
+    "immediate_symptom_relief": "Use over-the-counter antifungal creams or powders. Keep the affected area clean and dry.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "GERD": {
+    "disease": "GERD",
+    "specialist": "Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Gastroenterologist.",
+    "primary_medications": "Over-the-counter antacids can provide relief. Avoid spicy, fatty foods and eating late at night. Elevate your head while sleeping.",
+    "immediate_symptom_relief": "Over-the-counter antacids can provide relief. Avoid spicy, fatty foods and eating late at night. Elevate your head while sleeping.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Gastroenteritis": {
+    "disease": "Gastroenteritis",
+    "specialist": "Gastroenterologist / General Physician",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Gastroenterologist / General Physician.",
+    "primary_medications": "Stay hydrated with water or oral rehydration solutions. Stick to a bland diet (bananas, rice, toast). Rest.",
+    "immediate_symptom_relief": "Oral Rehydration Solution (ORS) or Electrolyte Drink; Loperamide",
+    "alternative_relief": "Bismuth Subsalicylate",
+    "self_care_lifestyle": "Bland diet (BRAT)",
+    "contraindications_warnings": []
+  },
+  "Heart attack": {
+    "disease": "Heart attack",
+    "specialist": "Cardiologist / Emergency Medicine (IMMEDIATE 911)",
+    "triage_level": "CRITICAL EMERGENCY",
+    "triage_color": "#ef4444",
+    "triage_action": "Call Emergency Medical Services (911) immediately. Do not drive.",
+    "primary_medications": "This is a medical emergency. Call emergency services immediately. Chew an aspirin if available and recommended by emergency services.",
+    "immediate_symptom_relief": "**EMERGENCY: Chewable Aspirin (325mg) immediately if not allergic",
+    "alternative_relief": "then CALL 911.**",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "CRITICAL MEDICAL EMERGENCY: Chew one adult aspirin (325mg) if not allergic, and call 911 / emergency services immediately."
+    ]
+  },
+  "Hepatitis B": {
+    "disease": "Hepatitis B",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "Requires long-term medical supervision and may involve antiviral medications prescribed by a doctor.",
+    "immediate_symptom_relief": "Acetaminophen (with extreme caution and low dose",
+    "alternative_relief": "or avoid entirely)",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "Strictly avoid all alcohol and hepatotoxic substances. Avoid excessive acetaminophen/paracetamol."
+    ]
+  },
+  "Hepatitis C": {
+    "disease": "Hepatitis C",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "Requires treatment with antiviral medications prescribed by a specialist. Early diagnosis and treatment are key.",
+    "immediate_symptom_relief": "Acetaminophen (with extreme caution and low dose",
+    "alternative_relief": "or avoid entirely)",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "Strictly avoid all alcohol and hepatotoxic substances. Avoid excessive acetaminophen/paracetamol."
+    ]
+  },
+  "Hepatitis D": {
+    "disease": "Hepatitis D",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "Requires management by a healthcare professional, often involving medications like interferon.",
+    "immediate_symptom_relief": "Acetaminophen (with extreme caution and low dose",
+    "alternative_relief": "or avoid entirely)",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "Strictly avoid all alcohol and hepatotoxic substances. Avoid excessive acetaminophen/paracetamol."
+    ]
+  },
+  "Hepatitis E": {
+    "disease": "Hepatitis E",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "Primarily involves supportive care: rest, adequate nutrition, and fluids. Avoid alcohol. Usually resolves on its own.",
+    "immediate_symptom_relief": "Acetaminophen (with extreme caution and low dose",
+    "alternative_relief": "or avoid entirely)",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "Strictly avoid all alcohol and hepatotoxic substances. Avoid excessive acetaminophen/paracetamol."
+    ]
+  },
+  "Hypertension": {
+    "disease": "Hypertension",
+    "specialist": "General Physician / Internist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Medical Specialist.",
+    "primary_medications": "Requires lifestyle changes (low-sodium diet, exercise) and medication prescribed by a doctor. Regular blood pressure monitoring is essential.",
+    "immediate_symptom_relief": "Acetaminophen (for pain/fever - *AVOID decongestants like Pseudoephedrine*)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Low-salt diet",
+    "contraindications_warnings": []
+  },
+  "Hyperthyroidism": {
+    "disease": "Hyperthyroidism",
+    "specialist": "Endocrinologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Endocrinologist.",
+    "primary_medications": "Requires medical treatment, which may include anti-thyroid medications, radioiodine therapy, or surgery. Consult an endocrinologist.",
+    "immediate_symptom_relief": "Acetaminophen or Ibuprofen (for general discomfort/aches)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Hypoglycemia": {
+    "disease": "Hypoglycemia",
+    "specialist": "Endocrinologist / Emergency Physician",
+    "triage_level": "URGENT",
+    "triage_color": "#f97316",
+    "triage_action": "Administer 15-20g fast-acting glucose immediately. If unaroused, call emergency services.",
+    "primary_medications": "Immediately consume 15-20 grams of fast-acting carbohydrates (like juice, candy, or glucose tablets). Follow up with a meal.",
+    "immediate_symptom_relief": "Glucose Tablets or High-Sugar Snack (e.g.",
+    "alternative_relief": "fruit juice",
+    "self_care_lifestyle": "candy)",
+    "contraindications_warnings": []
+  },
+  "Hypothyroidism": {
+    "disease": "Hypothyroidism",
+    "specialist": "Endocrinologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Endocrinologist.",
+    "primary_medications": "Requires daily thyroid hormone replacement medication (Levothyroxine) prescribed and monitored by a doctor.",
+    "immediate_symptom_relief": "Acetaminophen or Ibuprofen (for pain/aches)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest. Requires ongoing medical care.",
+    "contraindications_warnings": []
+  },
+  "Impetigo": {
+    "disease": "Impetigo",
+    "specialist": "Dermatologist / Pediatrician",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Dermatologist / Pediatrician.",
+    "primary_medications": "This bacterial infection requires topical or oral antibiotics prescribed by a doctor. Keep the area clean and avoid touching the sores.",
+    "immediate_symptom_relief": "This bacterial infection requires topical or oral antibiotics prescribed by a doctor. Keep the area clean and avoid touching the sores.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Jaundice": {
+    "disease": "Jaundice",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "Treatment depends on the underlying cause. It's crucial to see a doctor for diagnosis and a proper treatment plan.",
+    "immediate_symptom_relief": "Treatment depends on the underlying cause. It's crucial to see a doctor for diagnosis and a proper treatment plan.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Malaria": {
+    "disease": "Malaria",
+    "specialist": "Infectious Disease Specialist / General Physician",
+    "triage_level": "MODERATE / HIGH",
+    "triage_color": "#eab308",
+    "triage_action": "Blood smear / rapid test, artemisinin-based combination therapy, hydration.",
+    "primary_medications": "Requires prescription antimalarial drugs from a doctor. Seek medical attention immediately if you suspect malaria.",
+    "immediate_symptom_relief": "Acetaminophen (for fever/pain - **ABSOLUTELY AVOID NSAIDs/Aspirin**)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Migraine": {
+    "disease": "Migraine",
+    "specialist": "Neurologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Neurologist.",
+    "primary_medications": "Rest in a dark, quiet room. Over-the-counter pain relievers can help. For frequent migraines, a doctor can prescribe specific medications.",
+    "immediate_symptom_relief": "Ibuprofen, Naproxen, or Acetaminophen/Aspirin/Caffeine Combination",
+    "alternative_relief": "Antiemetics (e.g.",
+    "self_care_lifestyle": "Dimenhydrinate for nausea/vomiting)",
+    "contraindications_warnings": []
+  },
+  "Osteoarthristis": {
+    "disease": "Osteoarthristis",
+    "specialist": "Orthopedic Specialist / Rheumatologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Orthopedic Specialist / Rheumatologist.",
+    "primary_medications": "Maintain a healthy weight, stay active with low-impact exercises, and use over-the-counter pain relievers. Physical therapy can also help.",
+    "immediate_symptom_relief": "Maintain a healthy weight, stay active with low-impact exercises, and use over-the-counter pain relievers. Physical therapy can also help.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Paralysis (brain hemorrhage)": {
+    "disease": "Paralysis (brain hemorrhage)",
+    "specialist": "Neurologist / Neurosurgeon (EMERGENCY)",
+    "triage_level": "CRITICAL EMERGENCY",
+    "triage_color": "#ef4444",
+    "triage_action": "Urgent emergency stroke center evaluation required immediately.",
+    "primary_medications": "This is a medical emergency. Call emergency services immediately. Time is critical for treatment.",
+    "immediate_symptom_relief": "This is a medical emergency. Call emergency services immediately. Time is critical for treatment.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": [
+      "TIME-CRITICAL EMERGENCY: Do not give food or fluids. Seek emergency hospital care within the golden window (<3-4.5 hours)."
+    ]
+  },
+  "Peptic ulcer diseae": {
+    "disease": "Peptic ulcer diseae",
+    "specialist": "Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Gastroenterologist.",
+    "primary_medications": "Consult a qualified Gastroenterologist for a comprehensive diagnostic and medical management plan.",
+    "immediate_symptom_relief": "Consult a qualified Gastroenterologist for a comprehensive diagnostic and medical management plan.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": [
+      "Avoid NSAIDs, aspirin, caffeine, and smoking which severely irritate the gastrointestinal mucosal lining."
+    ]
+  },
+  "Pneumonia": {
+    "disease": "Pneumonia",
+    "specialist": "Pulmonologist / Critical Care Specialist",
+    "triage_level": "HIGH",
+    "triage_color": "#f97316",
+    "triage_action": "Chest radiography, oxygen saturation monitoring, and prompt antibiotic/antiviral treatment needed.",
+    "primary_medications": "Requires antibiotics prescribed by a doctor. Get plenty of rest and drink lots of fluids.",
+    "immediate_symptom_relief": "Acetaminophen or Ibuprofen; Dextromethorphan (Cough Suppressant); Guaifenesin (Expectorant)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Psoriasis": {
+    "disease": "Psoriasis",
+    "specialist": "Dermatologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Dermatologist.",
+    "primary_medications": "Use moisturizers and topical corticosteroids as recommended by a dermatologist. Various medical treatments are available.",
+    "immediate_symptom_relief": "Topical Hydrocortisone Cream (low strength); Coal Tar or Salicylic Acid products",
+    "alternative_relief": "Emollients/heavy moisturizers",
+    "self_care_lifestyle": "Cool baths",
+    "contraindications_warnings": []
+  },
+  "Tuberculosis": {
+    "disease": "Tuberculosis",
+    "specialist": "Pulmonologist / Infectious Disease Specialist",
+    "triage_level": "HIGH",
+    "triage_color": "#f97316",
+    "triage_action": "Chest X-ray, sputum AFB culture, and isolation precautions. Directly Observed Therapy required.",
+    "primary_medications": "Consult a qualified Pulmonologist / Infectious Disease Specialist for a comprehensive diagnostic and medical management plan.",
+    "immediate_symptom_relief": "Acetaminophen or Ibuprofen (for fever/pain/cough)",
+    "alternative_relief": "Dextromethorphan (Cough Suppressant)",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": [
+      "Infectious transmission risk: Wear an N95 mask, isolate in well-ventilated space until cleared non-infectious by a physician."
+    ]
+  },
+  "Typhoid": {
+    "disease": "Typhoid",
+    "specialist": "Infectious Disease Specialist / General Physician",
+    "triage_level": "MODERATE / HIGH",
+    "triage_color": "#eab308",
+    "triage_action": "Blood culture, hydration, and targeted antibiotic therapy.",
+    "primary_medications": "Requires a course of antibiotics prescribed by a doctor. Drink plenty of fluids to prevent dehydration.",
+    "immediate_symptom_relief": "Acetaminophen (for fever/pain - **AVOID NSAIDs/Aspirin**)",
+    "alternative_relief": "N/A",
+    "self_care_lifestyle": "Rest",
+    "contraindications_warnings": []
+  },
+  "Urinary tract infection": {
+    "disease": "Urinary tract infection",
+    "specialist": "Urologist / Nephrologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Urologist / Nephrologist.",
+    "primary_medications": "Drink plenty of water to help flush out bacteria. A doctor will likely prescribe a course of antibiotics.",
+    "immediate_symptom_relief": "Phenazopyridine (for pain/burning relief only - *will not cure infection*)",
+    "alternative_relief": "Cranberry supplements",
+    "self_care_lifestyle": "Increased fluid intake. Requires a doctor for antibiotics.",
+    "contraindications_warnings": []
+  },
+  "Varicose veins": {
+    "disease": "Varicose veins",
+    "specialist": "Vascular Surgeon / Phlebologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Vascular Surgeon / Phlebologist.",
+    "primary_medications": "Elevate your legs when resting, wear compression stockings, and exercise regularly. A doctor can discuss other treatment options.",
+    "immediate_symptom_relief": "Elevate your legs when resting, wear compression stockings, and exercise regularly. A doctor can discuss other treatment options.",
+    "alternative_relief": "",
+    "self_care_lifestyle": "Ensure adequate rest, hydration, balanced nutrition, and symptom tracking. Avoid self-prescribed antibiotics.",
+    "contraindications_warnings": []
+  },
+  "hepatitis A": {
+    "disease": "hepatitis A",
+    "specialist": "Hepatologist / Gastroenterologist",
+    "triage_level": "MODERATE",
+    "triage_color": "#38bdf8",
+    "triage_action": "Schedule an in-person clinical consultation with a Hepatologist / Gastroenterologist.",
+    "primary_medications": "Rest, stay hydrated, and eat a healthy diet. Avoid alcohol. The body usually clears the virus on its own.",
+    "immediate_symptom_relief": "Acetaminophen (with extreme caution and low dose",
+    "alternative_relief": "or avoid entirely)",
+    "self_care_lifestyle": "N/A",
+    "contraindications_warnings": [
+      "Strictly avoid all alcohol and hepatotoxic substances. Avoid excessive acetaminophen/paracetamol."
+    ]
+  }
+}

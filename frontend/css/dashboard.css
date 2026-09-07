@@ -1,0 +1,679 @@
+/* ══════════════════════════════════════════════════════════════════
+   MediFusion AI — Workspace & Dashboard Layout Styles (Premium)
+   ══════════════════════════════════════════════════════════════════ */
+
+.workspace-page {
+    padding: 3rem 0 5rem;
+    min-height: calc(100vh - var(--header-height) - 150px);
+}
+
+.workspace-header {
+    margin-bottom: 2.5rem;
+}
+
+.workspace-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.workspace-title-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.workspace-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: rgba(45, 212, 191, 0.12);
+    border: 1px solid var(--border-accent);
+    color: var(--accent-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+}
+
+.workspace-icon-box:hover {
+    transform: scale(1.05);
+}
+
+.workspace-title {
+    font-size: 1.85rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: #080c15 !important;
+}
+
+.workspace-subtitle {
+    font-size: 0.95rem;
+    color: #0f1729 !important;
+    max-width: 680px;
+    line-height: 1.55;
+    font-weight: 500;
+}
+
+/* ─── Two-Column Interactive Workspace Layout ─── */
+.workspace-grid {
+    display: grid;
+    grid-template-columns: 460px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.workspace-grid-equal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.workspace-panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-normal);
+    border-radius: var(--radius-xl);
+    padding: 1.85rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Premium left accent bar */
+.workspace-panel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    bottom: 20%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, var(--accent-teal), transparent);
+    border-radius: 0 2px 2px 0;
+    opacity: 0.5;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.panel-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #080c15 !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.panel-tag {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #0f1729;
+    background: rgba(148, 163, 184, 0.14);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+}
+
+/* ─── Empty & Initial States (Enhanced) ─── */
+.empty-stage-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem;
+    min-height: 480px;
+    border: 1px dashed var(--border-normal);
+    border-radius: var(--radius-lg);
+    background: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle floating medical cross pattern */
+.empty-stage-box::before {
+    content: '+';
+    position: absolute;
+    top: 15%;
+    right: 12%;
+    font-size: 3rem;
+    font-weight: 200;
+    color: rgba(45, 212, 191, 0.06);
+    animation: float-symbol 8s ease-in-out infinite;
+}
+
+.empty-stage-box::after {
+    content: '+';
+    position: absolute;
+    bottom: 18%;
+    left: 10%;
+    font-size: 2rem;
+    font-weight: 200;
+    color: rgba(139, 92, 246, 0.06);
+    animation: float-symbol 6s ease-in-out infinite reverse;
+}
+
+@keyframes float-symbol {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(15deg); }
+}
+
+.empty-stage-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: rgba(148, 163, 184, 0.06);
+    border: 1px solid var(--border-subtle);
+    color: #0f1729;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    animation: empty-icon-breathe 4s ease-in-out infinite;
+}
+
+@keyframes empty-icon-breathe {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.05); opacity: 1; }
+}
+
+.empty-stage-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #080c15 !important;
+    margin-bottom: 0.5rem;
+}
+
+.empty-stage-desc {
+    font-size: 0.88rem;
+    color: #0f1729 !important;
+    max-width: 340px;
+    line-height: 1.55;
+    font-weight: 500;
+}
+    line-height: 1.55;
+    font-weight: 500;
+}
+
+/* ─── Results Stage Styling ─── */
+.results-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    animation: fade-in-up 0.4s var(--ease-out-smooth) forwards;
+}
+
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.primary-assessment-card {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Premium gradient top accent */
+.primary-assessment-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-premium);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+/* Animated corner accent dots */
+.primary-assessment-card::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-teal);
+    box-shadow: 0 0 12px var(--accent-teal-glow);
+    animation: corner-dot-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes corner-dot-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.assessment-top-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+}
+
+.assessment-meta-label {
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #1a2540;
+    margin-bottom: 0.4rem;
+}
+
+.assessment-condition-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #0f172a;
+}
+
+.confidence-meter-chip {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.confidence-val {
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--accent-teal);
+    letter-spacing: -0.02em;
+}
+
+.confidence-lbl {
+    font-size: 0.72rem;
+    color: #1a2540;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+}
+
+/* ─── Distribution Chart Grid ─── */
+.chart-container-box {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    margin-top: 1rem;
+}
+
+.chart-container-tall {
+    height: 280px;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   General Disease & Pharmacological Diagnostic Workspace Components
+   ══════════════════════════════════════════════════════════════════ */
+
+/* Category Filter Bar */
+.category-filter-bar {
+    display: flex;
+    gap: 0.45rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.85rem;
+    scrollbar-width: thin;
+}
+
+.category-filter-bar::-webkit-scrollbar {
+    height: 4px;
+}
+
+.category-filter-bar::-webkit-scrollbar-thumb {
+    background: var(--border-normal);
+    border-radius: 4px;
+}
+
+.cat-filter-btn {
+    white-space: nowrap;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cat-filter-btn:hover {
+    background: rgba(14, 165, 233, 0.1);
+    color: var(--accent-blue-bright);
+    border-color: var(--accent-blue-dim);
+}
+
+.cat-filter-btn.active {
+    background: var(--accent-blue-bright);
+    color: #ffffff;
+    border-color: var(--accent-blue);
+    box-shadow: 0 2px 10px rgba(14, 165, 233, 0.35);
+}
+
+/* Clinical Preset Bar */
+.preset-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    padding: 0.65rem 0.85rem;
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.preset-title {
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #0f1729;
+}
+
+.preset-chip {
+    font-size: 0.74rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 12px;
+    background: #f0f9ff;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    color: #0284c7;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.preset-chip:hover {
+    background: var(--accent-blue-bright);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Selected Symptoms Tray */
+.selected-symptoms-tray {
+    background: #f0f9ff;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.selected-tray-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.selected-tray-count {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--accent-blue-deep);
+}
+
+.clear-symptoms-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: color 0.15s ease;
+}
+
+.clear-symptoms-btn:hover {
+    color: var(--danger);
+}
+
+.selected-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    max-height: 90px;
+    overflow-y: auto;
+}
+
+.symptom-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.22rem 0.55rem;
+    border-radius: 14px;
+    background: #e0f2fe;
+    border: 1px solid #7dd3fc;
+    color: #0369a1;
+    font-size: 0.74rem;
+    font-weight: 600;
+}
+
+.symptom-chip-remove {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #0284c7;
+    transition: color 0.15s ease;
+}
+
+.symptom-chip-remove:hover {
+    color: var(--danger);
+}
+
+/* 132-Symptom Scrollable Catalog Grid */
+.symptom-catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.45rem;
+    max-height: 380px;
+    overflow-y: auto;
+    padding-right: 0.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.symptom-card-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.symptom-card-item:hover {
+    background: #f8fafc;
+    border-color: var(--border-normal);
+}
+
+.symptom-card-item.selected {
+    background: #e0f2fe;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 12px rgba(14, 165, 233, 0.25);
+}
+
+.symptom-checkbox-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1.5px solid var(--border-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.18s ease;
+}
+
+.symptom-card-item.selected .symptom-checkbox-box {
+    background: var(--accent-blue-bright);
+    border-color: var(--accent-blue-bright);
+}
+
+.symptom-checkbox-box svg {
+    display: none;
+}
+
+.symptom-card-item.selected .symptom-checkbox-box svg {
+    display: block;
+    color: #ffffff;
+}
+
+.symptom-text-col {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.symptom-item-title {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.symptom-item-category {
+    font-size: 0.68rem;
+    color: #253352;
+    font-weight: 600;
+}
+
+/* ─── Pharmacological Treatment & Medication Section ─── */
+.medication-guide-container {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.medication-block {
+    background: #ffffff;
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.15rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition: var(--transition-normal);
+}
+
+.medication-block:hover {
+    border-color: var(--border-normal);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.med-block-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.65rem;
+}
+
+.med-block-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    background: rgba(14, 165, 233, 0.12);
+    color: var(--accent-blue-deep);
+}
+
+.med-block-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #0f172a;
+}
+
+.med-block-body {
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: #0f1729;
+    font-weight: 500;
+}
+
+/* Red Contraindication Alert */
+.contraindication-box {
+    background: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+}
+
+.contraindication-icon {
+    color: #e11d48;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.contraindication-text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #9f1239;
+}
+
+.contraindication-title {
+    font-weight: 700;
+    font-size: 0.84rem;
+    color: #881337;
+    margin-bottom: 0.2rem;
+}
+
+/* Specialist Consultation Banner */
+.specialist-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.15rem;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    border: 1px solid rgba(14, 165, 233, 0.35);
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+}
+
+.specialist-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-blue-deep);
+    font-weight: 700;
+}
+
+.specialist-name {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.triage-badge-pill {
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+

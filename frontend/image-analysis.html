@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MediFusion AI Image Intelligence — Deep Learning ResNet18 Chest Radiograph Analysis and Grad-CAM Explainability.">
+    <title>Image Analysis Suite — MediFusion AI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/css/global.css?v=5.0">
+    <link rel="stylesheet" href="/static/css/dashboard.css?v=5.0">
+    <link rel="stylesheet" href="/static/css/components.css?v=5.0">
+    <link rel="stylesheet" href="/static/css/responsive.css?v=5.0">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <header class="site-nav" role="banner">
+        <div class="app-container-wide nav-inner">
+            <a href="/" class="brand-logo">
+                <div class="brand-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/></svg>
+                </div>
+                <div class="brand-name">MediFusion<span>AI</span></div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="/symptom-analysis" class="nav-item">General Symptoms</a>
+                <a href="/image-analysis" class="nav-item active">Image Analysis</a>
+                <a href="/multimodal" class="nav-item">Multimodal Assessment</a>
+                <a href="/insights" class="nav-item">Model Insights</a>
+                <a href="/about" class="nav-item">About</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="/multimodal" class="btn btn-primary" style="padding:0.5rem 1.15rem; font-size:0.84rem;">Start Assessment</a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Open Menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="mobile-nav-drawer" id="mobileDrawer">
+        <a href="/symptom-analysis" class="nav-item">General Symptoms</a>
+        <a href="/image-analysis" class="nav-item active">Image Analysis</a>
+        <a href="/multimodal" class="nav-item">Multimodal Assessment</a>
+        <a href="/insights" class="nav-item">Model Insights</a>
+        <a href="/about" class="nav-item">About</a>
+    </div>
+
+    <!-- ─── Main Workspace ─── -->
+    <main class="workspace-page">
+        <div class="app-container-wide">
+            <!-- Header -->
+            <div class="workspace-header">
+                <div class="workspace-header-top">
+                    <div class="workspace-title-group">
+                        <div class="workspace-icon-box">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <div>
+                            <h1 class="workspace-title">Radiological Vision Suite</h1>
+                            <p class="workspace-subtitle">Deep learning transfer analysis of chest radiographs with target layer Grad-CAM visual attention mapping.</p>
+                        </div>
+                    </div>
+                    <div style="display:flex; gap:0.5rem; align-items:center;">
+                        <span class="validated-badge">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span>Image Validation Active</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two-Column Workspace Layout -->
+            <div class="workspace-grid">
+                <!-- Left Input Panel -->
+                <div class="workspace-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <span>Radiograph Input</span>
+                        </span>
+                        <span class="panel-tag">ResNet18 Backbone</span>
+                    </div>
+
+                    <!-- Dropzone -->
+                    <div class="medical-dropzone" id="imageDropzone">
+                        <div id="dropzoneInitial">
+                            <div class="dropzone-icon-ring">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9M8 17l4-4 4 4"/></svg>
+                            </div>
+                            <div class="dropzone-main-text">Drag & drop chest X-ray image</div>
+                            <div class="dropzone-sub-text">DICOM, JPEG, PNG supported • Max 15MB</div>
+                            <div class="dropzone-validation-notice">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <span>Only medical chest radiographs accepted</span>
+                            </div>
+                        </div>
+
+                        <!-- Preview Container -->
+                        <div id="previewContainer" class="preview-container" style="display:none;">
+                            <img id="previewImg" class="preview-img" alt="Chest Radiograph Preview">
+                            <div class="scanner-overlay" id="imageScannerBeam" style="display:none;">
+                                <div class="scanner-beam"></div>
+                            </div>
+                        </div>
+
+                        <input type="file" id="imageFileInput" accept="image/png,image/jpeg,image/jpg" style="display:none;">
+                    </div>
+
+                    <div class="preview-controls" style="margin-top:0.75rem;">
+                        <span id="fileMetadataPill" class="metadata-pill">No image selected</span>
+                        <button id="removeImageBtn" class="btn btn-ghost" style="font-size:0.78rem; padding:0.25rem 0.6rem; color:var(--danger);">Clear</button>
+                    </div>
+
+                    <!-- Inference Trigger -->
+                    <div style="margin-top:1.5rem;">
+                        <button id="runImageAnalysisBtn" class="btn btn-primary" style="width:100%;" disabled>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                            <span id="imageBtnText">Analyze Radiograph</span>
+                        </button>
+                    </div>
+
+                    <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border-subtle); font-size:0.78rem; color:var(--text-muted); line-height:1.6;">
+                        <strong style="color:var(--text-secondary);">Model Architecture:</strong> ResNet-18 pretrained on ImageNet, fine-tuned on 5,856 chest radiographs with weighted CrossEntropyLoss for pathology localization.
+                    </div>
+                </div>
+
+                <!-- Right Workspace Stage -->
+                <div>
+                    <!-- Empty State -->
+                    <div class="empty-stage-box" id="emptyStage">
+                        <div class="empty-stage-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                        </div>
+                        <h3 class="empty-stage-title">Awaiting Radiograph Upload</h3>
+                        <p class="empty-stage-desc">Upload a chest radiograph or load a test sample on the left panel to execute deep residual analysis and Grad-CAM attention rendering.</p>
+                    </div>
+
+                    <!-- Results Stage -->
+                    <div class="results-stage" id="imageResultsStage" style="display:none;">
+                        <!-- Primary Assessment Card -->
+                        <div class="primary-assessment-card">
+                            <div class="assessment-top-row">
+                                <div>
+                                    <div class="assessment-meta-label">Primary Radiological Finding</div>
+                                    <div class="assessment-condition-title" id="imagePredCondition">PNEUMONIA</div>
+                                    <span class="badge badge-warning" id="imageStatusBadge" style="margin-top:0.4rem;">Pathology Detected</span>
+                                </div>
+                                <div class="confidence-meter-chip">
+                                    <div class="confidence-val" id="imagePredConfidence">99.2%</div>
+                                    <div class="confidence-lbl">Model Confidence</div>
+                                </div>
+                            </div>
+
+                            <!-- Probability Chart -->
+                            <div class="chart-container-box">
+                                <canvas id="imageProbabilityChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Professional Image Comparison Viewer -->
+                        <div class="image-viewer-card">
+                            <div class="viewer-toolbar">
+                                <div style="display:flex; align-items:center; gap:0.75rem;">
+                                    <span style="font-size:0.92rem; font-weight:700; color:var(--text-highlight);">Visual Attention Map</span>
+                                    <span class="badge badge-teal">Grad-CAM layer4</span>
+                                </div>
+
+                                <div class="viewer-mode-tabs">
+                                    <button class="viewer-tab-btn" data-mode="original">Original</button>
+                                    <button class="viewer-tab-btn" data-mode="heatmap">Heatmap Only</button>
+                                    <button class="viewer-tab-btn active" data-mode="overlay">Blended Overlay</button>
+                                </div>
+
+                                <div style="display:flex; gap:0.35rem;">
+                                    <button id="zoomInBtn" class="btn btn-secondary" style="padding:0.3rem 0.65rem; font-size:0.8rem;">+</button>
+                                    <button id="zoomOutBtn" class="btn btn-secondary" style="padding:0.3rem 0.65rem; font-size:0.8rem;">−</button>
+                                    <button id="zoomResetBtn" class="btn btn-secondary" style="padding:0.3rem 0.65rem; font-size:0.8rem;">Reset</button>
+                                </div>
+                            </div>
+
+                            <div class="viewer-stage" id="viewerStage">
+                                <div class="stage-layer">
+                                    <img id="viewerOrigImg" alt="Original Radiograph" style="display:none;">
+                                </div>
+                                <div class="stage-layer">
+                                    <img id="viewerHeatmapImg" alt="Grad-CAM Heatmap" style="display:none;">
+                                </div>
+                                <div class="stage-layer">
+                                    <img id="viewerOverlayImg" alt="Grad-CAM Overlay">
+                                </div>
+                            </div>
+
+                            <!-- Opacity Slider -->
+                            <div class="opacity-slider-row" id="opacitySliderRow">
+                                <label for="gradcamOpacitySlider">Attention Opacity: <span id="opacityValLabel" style="color:var(--accent-teal);">65%</span></label>
+                                <input type="range" id="gradcamOpacitySlider" min="0" max="100" value="65" class="custom-range">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="app-container footer-bottom">
+            <div>© 2026 MediFusion AI Research Platform.</div>
+            <div>ResNet-18 Vision Model • Grad-CAM Spatial Explainability.</div>
+        </div>
+    </footer>
+
+    <script src="/static/js/api.js?v=5.0"></script>
+    <script src="/static/js/ui.js?v=5.0"></script>
+    <script src="/static/js/charts.js?v=5.0"></script>
+    <script src="/static/js/navigation.js?v=5.0"></script>
+    <script src="/static/js/image-validator.js?v=5.0"></script>
+    <script src="/static/js/image-analysis.js?v=5.0"></script>
+</body>
+</html>

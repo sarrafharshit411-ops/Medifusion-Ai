@@ -1,0 +1,674 @@
+/* ══════════════════════════════════════════════════════════════════
+   MediFusion AI — Specialized Interactive Components (Premium)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ─── 1. Medical Upload & Dropzone (Enhanced) ─── */
+.medical-dropzone {
+    border: 1.5px dashed var(--border-normal);
+    border-radius: var(--radius-lg);
+    background: #ffffff;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated rotating dash border effect on hover */
+.medical-dropzone::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: conic-gradient(from 0deg, transparent, rgba(45, 212, 191, 0.15), transparent, rgba(139, 92, 246, 0.1), transparent);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity var(--transition-slow);
+    animation: dropzone-border-rotate 6s linear infinite;
+}
+
+@keyframes dropzone-border-rotate {
+    to { transform: rotate(360deg); }
+}
+
+.medical-dropzone:hover::before,
+.medical-dropzone.drag-active::before {
+    opacity: 1;
+}
+
+.medical-dropzone:hover,
+.medical-dropzone.drag-active {
+    border-color: var(--accent-teal);
+    background: rgba(45, 212, 191, 0.04);
+    box-shadow: inset 0 0 35px rgba(45, 212, 191, 0.05), 0 0 30px rgba(45, 212, 191, 0.08);
+}
+
+.dropzone-icon-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(45, 212, 191, 0.08);
+    border: 1.5px solid var(--border-accent);
+    color: var(--accent-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    transition: var(--transition-normal);
+    position: relative;
+}
+
+/* Pulse ring around icon */
+.dropzone-icon-ring::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    animation: icon-ring-pulse 3s ease-in-out infinite;
+}
+
+@keyframes icon-ring-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0; }
+}
+
+.medical-dropzone:hover .dropzone-icon-ring {
+    transform: scale(1.1);
+    box-shadow: 0 0 24px var(--accent-teal-glow);
+}
+
+.dropzone-main-text {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #080c15 !important;
+    margin-bottom: 0.35rem;
+}
+
+.dropzone-sub-text {
+    font-size: 0.78rem;
+    color: #0f1729 !important;
+    font-weight: 600;
+}
+
+/* Validation accepted banner inside dropzone */
+.dropzone-validation-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #b45309;
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: var(--radius-full);
+}
+
+/* Uploaded Preview State */
+.preview-container {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #02040a;
+    border: 1px solid var(--border-normal);
+    margin-bottom: 1.25rem;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Film-strip corners on preview */
+.preview-container::before,
+.preview-container::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(45, 212, 191, 0.3);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.preview-container::before {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+    border-radius: 4px 0 0 0;
+}
+
+.preview-container::after {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 4px 0;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 260px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.preview-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.5rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.metadata-pill {
+    font-size: 0.74rem;
+    font-family: 'JetBrains Mono', monospace, sans-serif;
+    color: #0f1729 !important;
+    background: rgba(148, 163, 184, 0.2);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+}
+
+/* ─── 2. Professional Image Comparison Viewer ─── */
+.image-viewer-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.viewer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.viewer-mode-tabs {
+    display: flex;
+    gap: 0.25rem;
+    background: #f1f5f9;
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+}
+
+.viewer-tab-btn {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    border: none;
+    color: #1a2540;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.viewer-tab-btn.active {
+    background: var(--bg-surface-active);
+    color: var(--text-highlight);
+    border: 1px solid var(--border-accent);
+}
+
+.viewer-stage {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: #02040a;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-subtle);
+}
+
+/* Radiograph viewer label */
+.viewer-stage::before {
+    content: 'RADIOGRAPH VIEWER';
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(45, 212, 191, 0.35);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.stage-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stage-layer img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.opacity-slider-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-subtle);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+    margin-top: 1rem;
+}
+
+.opacity-slider-row label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #0f1729;
+    min-width: 120px;
+}
+
+.custom-range {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: var(--border-strong);
+    border-radius: 5px;
+    outline: none;
+}
+
+.custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent-teal);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--accent-teal);
+}
+
+/* ─── 3. Categorized Symptom Selector ─── */
+.symptom-search-box {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.search-input-field {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.6rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-normal);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 0.88rem;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.search-input-field:focus {
+    border-color: var(--accent-teal);
+    box-shadow: 0 0 0 3px var(--accent-teal-dim);
+}
+
+.search-icon-left {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.symptom-category-tabs {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.cat-filter-btn {
+    padding: 0.35rem 0.75rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    background: rgba(148, 163, 184, 0.1);
+    border: 1px solid var(--border-subtle);
+    color: #1a2540;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition-fast);
+}
+
+.cat-filter-btn.active, .cat-filter-btn:hover {
+    background: var(--accent-teal-dim);
+    color: var(--accent-teal);
+    border-color: var(--border-accent);
+}
+
+.symptom-tags-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 0.35rem;
+}
+
+.symptom-tag-pill {
+    padding: 0.45rem 0.9rem;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid var(--border-normal);
+    background: #ffffff;
+    color: #0f1729;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    user-select: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.symptom-tag-pill:hover {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue-deep);
+    background: #f0f9ff;
+}
+
+.symptom-tag-pill.selected {
+    background: #e0f2fe;
+    border-color: var(--accent-blue);
+    color: #0369a1;
+    box-shadow: 0 2px 8px rgba(14, 165, 233, 0.2);
+    font-weight: 600;
+}
+
+/* ─── 4. Clinical Vitals Grid ─── */
+.vitals-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.vital-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.vital-label {
+    font-size: 0.76rem;
+    font-weight: 700;
+    color: #0f1729;
+    display: flex;
+    justify-content: space-between;
+}
+
+.vital-label span {
+    color: var(--accent-cyan);
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.vital-input {
+    padding: 0.65rem 0.85rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-normal);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.vital-input:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 3px var(--accent-cyan-dim);
+}
+
+/* ─── 5. Multimodal Flagship Modality Cards ─── */
+.modality-toggles-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.modality-switch-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-normal);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Premium top accent line on active cards */
+.modality-switch-card.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.modality-switch-card:nth-child(1).active::before {
+    background: linear-gradient(90deg, var(--accent-teal), transparent);
+}
+
+.modality-switch-card:nth-child(2).active::before {
+    background: linear-gradient(90deg, var(--accent-violet), transparent);
+}
+
+.modality-switch-card:nth-child(3).active::before {
+    background: linear-gradient(90deg, var(--accent-cyan), transparent);
+}
+
+.modality-switch-card.active {
+    border-color: var(--accent-blue);
+    background: #f0f9ff;
+    box-shadow: 0 4px 16px rgba(14, 165, 233, 0.12);
+}
+
+.modality-switch-card.disabled {
+    opacity: 0.45;
+    cursor: default;
+}
+
+.modality-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.modality-card-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #080c15 !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modality-status-indicator {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+}
+
+.status-ready { background: var(--success-dim); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+.status-empty { background: rgba(148, 163, 184, 0.1); color: var(--text-muted); border: 1px solid var(--border-subtle); }
+.status-processing { background: var(--info-dim); color: var(--info); border: 1px solid rgba(56, 189, 248, 0.3); }
+
+/* ─── 6. Multimodal Circular Fusion Meter (Enhanced) ─── */
+.fusion-meter-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.radial-fusion-meter {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    margin-bottom: 1.25rem;
+}
+
+/* Ambient outer glow */
+.radial-fusion-meter::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(45, 212, 191, 0.08), transparent 70%);
+    animation: meter-outer-glow 3s ease-in-out infinite;
+}
+
+@keyframes meter-outer-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+.radial-svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.radial-bg-circle {
+    fill: none;
+    stroke: rgba(148, 163, 184, 0.12);
+    stroke-width: 10;
+}
+
+.radial-val-circle {
+    fill: none;
+    stroke: url(#fusionGrad);
+    stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    transition: stroke-dashoffset 1.4s var(--ease-out-smooth);
+    filter: drop-shadow(0 0 8px rgba(45, 212, 191, 0.3));
+}
+
+.radial-inner-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.radial-num {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-highlight);
+    letter-spacing: -0.03em;
+}
+
+.radial-lbl {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-teal);
+    font-weight: 700;
+}
+
+/* ─── 7. Modality Contribution Breakdown Bars (Enhanced) ─── */
+.contribution-breakdown-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-normal);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.contrib-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.contrib-row {
+    margin-bottom: 0.9rem;
+}
+
+.contrib-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+}
+
+.contrib-bar-track {
+    width: 100%;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+}
+
+.contrib-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width 1.2s var(--ease-out-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shine sweep on contribution bars */
+.contrib-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    animation: bar-shine-sweep 2.5s ease-in-out infinite;
+    animation-delay: 1s;
+}
+
+@keyframes bar-shine-sweep {
+    0%, 100% { left: -100%; }
+    50% { left: 100%; }
+}
+
+.contrib-bar-image { background: linear-gradient(90deg, var(--accent-teal), #0d9488); }
+.contrib-bar-symptoms { background: linear-gradient(90deg, var(--accent-violet), #6366f1); }
+.contrib-bar-clinical { background: linear-gradient(90deg, var(--accent-cyan), #0284c7); }

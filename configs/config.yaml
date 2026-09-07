@@ -1,0 +1,79 @@
+# MediFusion AI Configuration
+# Central configuration for all components
+
+dataset:
+  xray_path: "C:\\Users\\vansh\\.cache\\kagglehub\\datasets\\paultimothymooney\\chest-xray-pneumonia\\versions\\2\\chest_xray"
+  symptom_path: "C:\\Users\\vansh\\.cache\\kagglehub\\datasets\\miltonmacgyver\\symptom-based-disease-prediction-dataset\\versions\\1\\disease_prediction.csv"
+  
+training:
+  seed: 42
+  val_split: 0.15  # Split from training data since val set is tiny
+  
+image_model:
+  architecture: "resnet18"
+  num_classes: 2  # NORMAL, PNEUMONIA
+  input_size: 224
+  batch_size: 32
+  epochs: 10
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  patience: 3  # Early stopping patience
+  freeze_layers: ["conv1", "bn1", "layer1", "layer2"]
+  
+symptom_model:
+  num_classes: 3  # Malaria, Pneumonia, Typhoid
+  symptom_features:
+    - fever
+    - cough
+    - headache
+    - nausea
+    - vomiting
+    - fatigue
+    - sore_throat
+    - chills
+    - body_pain
+    - loss_of_appetite
+    - abdominal_pain
+    - diarrhea
+    - sweating
+    - rapid_breathing
+    - dizziness
+  xgboost:
+    max_depth: 6
+    n_estimators: 200
+    learning_rate: 0.1
+    eval_metric: "mlogloss"
+    
+clinical_model:
+  clinical_features:
+    - age
+    - temperature
+    - heart_rate
+    - bp_systolic
+    - bp_diastolic
+    - respiratory_rate
+    - oxygen_saturation
+  xgboost:
+    max_depth: 5
+    n_estimators: 150
+    learning_rate: 0.1
+    
+fusion_model:
+  unified_classes: ["Normal", "Pneumonia", "Malaria", "Typhoid"]
+  image_embedding_dim: 512
+  symptom_embedding_dim: 15
+  clinical_embedding_dim: 22
+  hidden_dim: 256
+  projection_dim: 128
+  dropout: 0.3
+  epochs: 30
+  batch_size: 64
+  learning_rate: 0.001
+  
+api:
+  host: "0.0.0.0"
+  port: 8000
+  
+paths:
+  models_dir: "models"
+  reports_dir: "reports"
