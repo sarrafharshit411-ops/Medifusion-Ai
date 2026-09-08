@@ -4,6 +4,7 @@ Loads all trained models once at startup for the API.
 """
 
 import os
+import json
 import logging
 from typing import Dict, Optional
 
@@ -38,10 +39,35 @@ class ModelRegistry:
             "fusion": False,
             "general_disease": False,
         }
+
+        # ── Advanced Image Models ──
+        self._image_models: Dict[str, object] = {}
+        self._image_models_loaded: Dict[str, bool] = {
+            "brain_tumor": False,
+            "skin_cancer": False,
+            "retinopathy": False,
+            "blood_cell": False,
+        }
+        self.image_models_metadata: Dict = {}
     
     @property
     def models_loaded(self) -> Dict[str, bool]:
-        return self._loaded.copy()
+        combined = self._loaded.copy()
+        for key, loaded in self._image_models_loaded.items():
+            combined[f"image_{key}"] = loaded
+        return combined
+    
+    def get_image_model(self, dataset_key: str):
+        """Get a loaded image model by dataset key."""
+        if dataset_key == "chest_xray":
+            return self.image_model
+        return self._image_models.get(dataset_key)
+    
+    def is_image_model_loaded(self, dataset_key: str) -> bool:
+        """Check if a specific image model is loaded."""
+        if dataset_key == "chest_xray":
+            return self._loaded.get("image", False)
+        return self._image_models_loaded.get(dataset_key, False)
     
     def load_all(self, models_dir: str):
         """Load all available models from the models directory."""
@@ -52,9 +78,12 @@ class ModelRegistry:
         self._load_clinical_model(models_dir)
         self._load_fusion_model(models_dir)
         self._load_general_disease_model(models_dir)
+        self._load_advanced_image_models(models_dir)
+        self._load_image_models_metadata(models_dir)
         
-        loaded_count = sum(self._loaded.values())
-        logger.info(f"Model loading complete: {loaded_count}/{len(self._loaded)} models loaded")
+        loaded_count = sum(self._loaded.values()) + sum(self._image_models_loaded.values())
+        total_count = len(self._loaded) + len(self._image_models_loaded)
+        logger.info(f"Model loading complete: {loaded_count}/{total_count} models loaded")
     
     def _load_image_model(self, models_dir: str):
         """Load the ResNet18 image model."""
@@ -170,7 +199,54 @@ class ModelRegistry:
         except Exception as e:
             logger.error(f"Failed to load general disease model: {e}")
 
+    def _load_advanced_image_models(self, models_dir: str):
+        """Load all advanced image models (brain tumor, skin cancer, retinopathy, blood cell)."""
+        from src.models.multi_image_model import MedicalImageClassifier, IMAGE_MODEL_CONFIGS
+
+        for dataset_key in self._image_models_loaded.keys():
+            filename = f"{dataset_key}_image_model.pth"
+            path = os.path.join(models_dir, filename)
+
+            if not os.path.exists(path):
+                logger.info(f"  ○ {dataset_key} image model not found at {path} (skipped)")
+                continue
+
+            try:
+                config = IMAGE_MODEL_CONFIGS.get(dataset_key, {})
+                num_classes = config.get("num_classes", 2)
+
+                model = MedicalImageClassifier(
+                    dataset_key=dataset_key,
+                    num_classes=num_classes,
+                    pretrained=False,
+                )
+                state_dict = torch.load(path, map_location=self.device, weights_only=True)
+                model.load_state_dict(state_dict)
+                model.to(self.device)
+                model.eval()
+
+                self._image_models[dataset_key] = model
+                self._image_models_loaded[dataset_key] = True
+                logger.info(f"✓ {dataset_key} image model loaded ({num_classes} classes)")
+            except Exception as e:
+                logger.error(f"✗ Failed to load {dataset_key} image model: {e}")
+
+    def _load_image_models_metadata(self, models_dir: str):
+        """Load clinical metadata JSON for all image models."""
+        meta_path = os.path.join(models_dir, "image_models_metadata.json")
+        if not os.path.exists(meta_path):
+            logger.info("  ○ image_models_metadata.json not found (skipped)")
+            return
+
+        try:
+            with open(meta_path, "r", encoding="utf-8") as f:
+                self.image_models_metadata = json.load(f)
+            logger.info(f"✓ Image models metadata loaded ({len(self.image_models_metadata)} entries)")
+        except Exception as e:
+            logger.error(f"Failed to load image models metadata: {e}")
+
 
 # Global singleton
 registry = ModelRegistry()
+
 

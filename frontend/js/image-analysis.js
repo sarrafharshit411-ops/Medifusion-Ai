@@ -1,28 +1,185 @@
 /**
- * MediFusion AI — Dedicated Image Analysis Module
- * Handles drag/drop, ResNet18 inference, and interactive Grad-CAM inspection.
+ * MediFusion AI — Advanced Multi-Model Image Analysis Module
+ * Handles model selection, drag/drop, multi-endpoint inference,
+ * clinical context display, and Grad-CAM inspection.
  */
 
 (function () {
     "use strict";
 
+    // ── State ──
     let currentFile = null;
     let originalDataUrl = null;
     let gradcamOverlayBase64 = null;
     let gradcamHeatmapBase64 = null;
     let zoomLevel = 1;
+    let selectedModelKey = null;
+    let modelsMetadata = {};
+    let modelsStatus = {};
+
+    // ── Model Definitions (fallback if API unavailable) ──
+    const MODEL_DEFS = [
+        {
+            key: "chest_xray",
+            title: "Chest X-Ray",
+            icon: "🫁",
+            classes: "2-class",
+            imageType: "grayscale",
+            description: "Pneumonia Detection",
+        },
+        {
+            key: "brain_tumor",
+            title: "Brain Tumor MRI",
+            icon: "🧠",
+            classes: "4-class",
+            imageType: "grayscale",
+            description: "Intracranial Neoplasm",
+        },
+        {
+            key: "skin_cancer",
+            title: "Skin Cancer",
+            icon: "🔬",
+            classes: "7-class",
+            imageType: "color",
+            description: "Dermatological Lesion",
+        },
+        {
+            key: "retinopathy",
+            title: "Retinopathy",
+            icon: "👁",
+            classes: "5-class",
+            imageType: "color",
+            description: "DR Severity Grading",
+        },
+        {
+            key: "blood_cell",
+            title: "Blood Cell",
+            icon: "🩸",
+            classes: "4-class",
+            imageType: "color",
+            description: "Hematological Microscopy",
+        },
+    ];
 
     document.addEventListener("DOMContentLoaded", () => {
+        initModelSelector();
         setupUpload();
         setupControls();
+        loadModelsStatus();
     });
+
+    // ── Model Selector ──
+
+    async function loadModelsStatus() {
+        try {
+            const statusData = await MediFusionAPI.getImageModelsStatus();
+            if (statusData && statusData.models) {
+                statusData.models.forEach(m => {
+                    modelsStatus[m.model_key] = m.loaded;
+                });
+                updateModelCards();
+            }
+        } catch (e) {
+            console.warn("Could not load image model status:", e);
+        }
+
+        try {
+            const metaData = await MediFusionAPI.getImageModelsMetadata();
+            if (metaData) {
+                modelsMetadata = metaData;
+            }
+        } catch (e) {
+            console.warn("Could not load image model metadata:", e);
+        }
+    }
+
+    function initModelSelector() {
+        const grid = document.getElementById("modelSelectorGrid");
+        if (!grid) return;
+
+        grid.innerHTML = "";
+
+        MODEL_DEFS.forEach(def => {
+            const card = document.createElement("div");
+            card.className = "model-card";
+            card.dataset.modelKey = def.key;
+
+            card.innerHTML = `
+                <div class="model-card-status not-loaded" id="status-${def.key}"></div>
+                <div class="model-card-icon">${def.icon}</div>
+                <div class="model-card-title">${def.title}</div>
+                <div class="model-card-classes">${def.classes} • ${def.description}</div>
+            `;
+
+            card.addEventListener("click", () => selectModel(def.key));
+            grid.appendChild(card);
+        });
+    }
+
+    function updateModelCards() {
+        MODEL_DEFS.forEach(def => {
+            const statusDot = document.getElementById(`status-${def.key}`);
+            if (statusDot) {
+                const loaded = modelsStatus[def.key] || false;
+                statusDot.className = `model-card-status ${loaded ? "loaded" : "not-loaded"}`;
+            }
+        });
+    }
+
+    function selectModel(modelKey) {
+        selectedModelKey = modelKey;
+
+        // Update card selection
+        document.querySelectorAll(".model-card").forEach(card => {
+            card.classList.toggle("selected", card.dataset.modelKey === modelKey);
+        });
+
+        // Update dropzone text
+        const def = MODEL_DEFS.find(d => d.key === modelKey);
+        const dropzoneMain = document.getElementById("dropzoneMainText");
+        const dropzoneSub = document.getElementById("dropzoneSubText");
+        const dropzoneNotice = document.getElementById("dropzoneNotice");
+        const analyzeBtn = document.getElementById("runImageAnalysisBtn");
+        const btnText = document.getElementById("imageBtnText");
+        const backboneTag = document.getElementById("modelBackboneTag");
+
+        if (dropzoneMain) dropzoneMain.textContent = `Drag & drop ${def ? def.title : "medical"} image`;
+        if (dropzoneSub) dropzoneSub.textContent = `${def?.imageType === "grayscale" ? "Grayscale" : "Color"} JPEG, PNG • Max 15MB`;
+        if (dropzoneNotice) {
+            dropzoneNotice.innerHTML = `
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>${def ? def.description : "Analysis"} pipeline selected</span>
+            `;
+        }
+
+        if (btnText) {
+            if (currentFile) {
+                btnText.textContent = `Analyze with ${def?.title || "Model"}`;
+                if (analyzeBtn) analyzeBtn.disabled = false;
+            } else {
+                btnText.textContent = `Upload Image for ${def?.title || "Analysis"}`;
+            }
+        }
+
+        if (backboneTag) backboneTag.textContent = "ResNet18";
+
+        // Update model info box
+        const infoBox = document.getElementById("modelInfoBox");
+        if (infoBox && def) {
+            const meta = modelsMetadata[modelKey] || {};
+            infoBox.innerHTML = `
+                <strong style="color:var(--text-secondary);">${def.title}:</strong>
+                ${meta.subtitle || def.description}. ${def.classes} classification using ${meta.backbone || "ResNet-18"} transfer learning
+                ${meta.dataset_source ? `<br><span style="color:var(--text-muted); font-size:0.72rem;">Dataset: ${meta.dataset_source}</span>` : ""}.
+            `;
+        }
+    }
+
+    // ── Upload & Image Handling ──
 
     function setupUpload() {
         const dropzone = document.getElementById("imageDropzone");
         const fileInput = document.getElementById("imageFileInput");
-        const dropzoneContent = document.getElementById("dropzoneInitial");
-        const previewContainer = document.getElementById("previewContainer");
-        const previewImg = document.getElementById("previewImg");
         const removeBtn = document.getElementById("removeImageBtn");
         const analyzeBtn = document.getElementById("runImageAnalysisBtn");
 
@@ -71,8 +228,8 @@
             return;
         }
 
-        // Run multi-layer medical image validation
-        if (window.ImageValidator) {
+        // Only run strict radiograph validation for chest_xray mode
+        if (selectedModelKey === "chest_xray" && window.ImageValidator) {
             const dropzone = document.getElementById("imageDropzone");
             MediFusionUI.showToast("info", "Validating radiograph structure...");
 
@@ -84,7 +241,6 @@
                     if (dropzone) {
                         MediFusionUI.showValidationError(dropzone, title, result.error, 6000);
                     }
-                    // Reset file input
                     const fileInput = document.getElementById("imageFileInput");
                     if (fileInput) fileInput.value = "";
                     return;
@@ -98,7 +254,6 @@
     }
 
     function loadFileDirectly(file) {
-        // Dismiss any existing validation error overlay
         const dropzone = document.getElementById("imageDropzone");
         if (dropzone) {
             const existingOverlay = dropzone.querySelector(".validation-error-overlay");
@@ -114,11 +269,19 @@
             const previewContainer = document.getElementById("previewContainer");
             const analyzeBtn = document.getElementById("runImageAnalysisBtn");
             const fileMeta = document.getElementById("fileMetadataPill");
+            const btnText = document.getElementById("imageBtnText");
 
             if (previewImg) previewImg.src = originalDataUrl;
             if (dropzoneInitial) dropzoneInitial.style.display = "none";
             if (previewContainer) previewContainer.style.display = "flex";
-            if (analyzeBtn) analyzeBtn.disabled = false;
+
+            if (selectedModelKey) {
+                if (analyzeBtn) analyzeBtn.disabled = false;
+                const def = MODEL_DEFS.find(d => d.key === selectedModelKey);
+                if (btnText) btnText.textContent = `Analyze with ${def?.title || "Model"}`;
+            } else {
+                if (btnText) btnText.textContent = "Select a Model First";
+            }
 
             if (fileMeta) {
                 const sizeKb = (file.size / 1024).toFixed(1);
@@ -138,11 +301,13 @@
         const previewContainer = document.getElementById("previewContainer");
         const fileInput = document.getElementById("imageFileInput");
         const analyzeBtn = document.getElementById("runImageAnalysisBtn");
+        const btnText = document.getElementById("imageBtnText");
 
         if (dropzoneInitial) dropzoneInitial.style.display = "block";
         if (previewContainer) previewContainer.style.display = "none";
         if (fileInput) fileInput.value = "";
         if (analyzeBtn) analyzeBtn.disabled = true;
+        if (btnText) btnText.textContent = selectedModelKey ? "Upload an Image" : "Select a Model to Begin";
 
         const emptyStage = document.getElementById("emptyStage");
         const resultsStage = document.getElementById("imageResultsStage");
@@ -150,8 +315,17 @@
         if (resultsStage) resultsStage.style.display = "none";
     }
 
+    // ── Inference ──
+
     async function runImageInference() {
-        if (!currentFile) return;
+        if (!currentFile) {
+            MediFusionUI.showToast("error", "Please upload an image first.");
+            return;
+        }
+        if (!selectedModelKey) {
+            MediFusionUI.showToast("error", "Please select an imaging model first.");
+            return;
+        }
 
         const analyzeBtn = document.getElementById("runImageAnalysisBtn");
         const btnText = document.getElementById("imageBtnText");
@@ -160,86 +334,195 @@
         const resultsStage = document.getElementById("imageResultsStage");
 
         if (analyzeBtn) analyzeBtn.disabled = true;
-        if (btnText) btnText.textContent = "Analyzing Radiograph...";
+        if (btnText) btnText.textContent = "Analyzing...";
         if (scannerBeam) scannerBeam.style.display = "block";
 
         try {
-            // Run prediction and Grad-CAM in parallel
-            const [predData, explainData] = await Promise.all([
-                MediFusionAPI.predictImage(currentFile),
-                MediFusionAPI.explainImage(currentFile),
-            ]);
+            let predData, explainData;
+
+            if (selectedModelKey === "chest_xray") {
+                // Use original endpoints for backward compatibility
+                [predData, explainData] = await Promise.all([
+                    MediFusionAPI.predictImage(currentFile),
+                    MediFusionAPI.explainImage(currentFile),
+                ]);
+                // Normalize chest_xray response to match advanced format
+                predData = normalizeChestXrayResponse(predData);
+            } else {
+                // Advanced model endpoints
+                [predData, explainData] = await Promise.all([
+                    MediFusionAPI.predictImageAdvanced(selectedModelKey, currentFile),
+                    MediFusionAPI.explainImageAdvanced(selectedModelKey, currentFile).catch(err => {
+                        console.warn("Grad-CAM not available for this model:", err);
+                        return null;
+                    }),
+                ]);
+            }
 
             if (emptyStage) emptyStage.style.display = "none";
             if (resultsStage) resultsStage.style.display = "flex";
 
-            // Update primary card values
-            const conditionEl = document.getElementById("imagePredCondition");
-            const confEl = document.getElementById("imagePredConfidence");
-            const badgeEl = document.getElementById("imageStatusBadge");
+            renderResults(predData);
+            renderGradCAM(explainData);
 
-            if (conditionEl) conditionEl.textContent = predData.predicted_class;
-            if (confEl) {
-                MediFusionUI.animateNumber(confEl, 0, predData.confidence * 100, 800, "%");
-            }
-
-            if (badgeEl) {
-                if (predData.predicted_class === "PNEUMONIA") {
-                    badgeEl.className = "badge badge-warning";
-                    badgeEl.textContent = "Pathology Detected";
-                } else {
-                    badgeEl.className = "badge badge-success";
-                    badgeEl.textContent = "Normal Clearance";
-                }
-            }
-
-            // Render Chart
-            MediFusionCharts.renderProbabilityBar("imageProbabilityChart", predData.predictions, true);
-
-            // Store explainability outputs
-            gradcamOverlayBase64 = explainData.gradcam_overlay_base64;
-            gradcamHeatmapBase64 = explainData.gradcam_heatmap_base64;
-
-            // Update Viewer Stage Layers
-            const origLayer = document.getElementById("viewerOrigImg");
-            const heatLayer = document.getElementById("viewerHeatmapImg");
-            const overlayLayer = document.getElementById("viewerOverlayImg");
-
-            if (origLayer) origLayer.src = originalDataUrl;
-            if (heatLayer) heatLayer.src = `data:image/png;base64,${gradcamHeatmapBase64}`;
-            if (overlayLayer) overlayLayer.src = `data:image/png;base64,${gradcamOverlayBase64}`;
-
-            setViewerMode("overlay");
-
-            MediFusionUI.showToast("success", "Inference & Grad-CAM attention map generated.");
+            MediFusionUI.showToast("success", "Analysis complete with clinical context.");
         } catch (err) {
             console.error("Image analysis error:", err);
-            const msg = err.message || "Unable to complete image analysis. Please verify server connection.";
+            const msg = err.message || "Unable to complete image analysis.";
             MediFusionUI.showToast("error", msg, 6000);
-            const dropzone = document.getElementById("imageDropzone");
-            if (dropzone && (msg.toLowerCase().includes("invalid") || msg.toLowerCase().includes("radiograph") || msg.toLowerCase().includes("screenshot"))) {
-                MediFusionUI.showValidationError(dropzone, "Medical Image Rejected", msg, 7000);
-            }
         } finally {
             if (analyzeBtn) analyzeBtn.disabled = false;
-            if (btnText) btnText.textContent = "Analyze Image";
+            const def = MODEL_DEFS.find(d => d.key === selectedModelKey);
+            if (btnText) btnText.textContent = `Analyze with ${def?.title || "Model"}`;
             if (scannerBeam) scannerBeam.style.display = "none";
         }
     }
 
+    function normalizeChestXrayResponse(data) {
+        // Convert original chest_xray response to AdvancedImagePredictionResponse format
+        const meta = modelsMetadata["chest_xray"] || {};
+        const classesMeta = meta.classes || {};
+
+        const predictions = (data.predictions || []).map(p => {
+            const cmeta = classesMeta[p.disease] || {};
+            return {
+                class_id: p.disease,
+                display_name: cmeta.display_name || p.disease,
+                probability: p.probability,
+                severity: cmeta.severity || (p.disease === "PNEUMONIA" ? "high" : "none"),
+                color: cmeta.color || "#3b82f6",
+                description: cmeta.description || "",
+                action: cmeta.action || "",
+            };
+        });
+
+        predictions.sort((a, b) => b.probability - a.probability);
+
+        const primary = predictions[0] || {};
+        return {
+            model_key: "chest_xray",
+            model_title: meta.title || "Chest X-Ray Analysis",
+            backbone: "ResNet-18",
+            predicted_class: data.predicted_class,
+            predicted_display_name: primary.display_name || data.predicted_class,
+            confidence: data.confidence,
+            severity: primary.severity || "none",
+            predictions: predictions,
+            clinical_context: primary.description || "",
+            recommended_action: primary.action || "",
+        };
+    }
+
+    // ── Result Rendering ──
+
+    function renderResults(data) {
+        // Model label
+        const modelLabel = document.getElementById("resultModelLabel");
+        if (modelLabel) modelLabel.textContent = data.model_title || data.model_key;
+
+        // Predicted condition
+        const conditionEl = document.getElementById("imagePredCondition");
+        if (conditionEl) conditionEl.textContent = data.predicted_display_name || data.predicted_class;
+
+        // Confidence
+        const confEl = document.getElementById("imagePredConfidence");
+        if (confEl) {
+            MediFusionUI.animateNumber(confEl, 0, data.confidence * 100, 800, "%");
+        }
+
+        // Severity badge
+        const severityBadge = document.getElementById("imageSeverityBadge");
+        if (severityBadge) {
+            const sev = data.severity || "none";
+            severityBadge.className = `severity-badge severity-${sev}`;
+            const labels = {
+                critical: "⚠ Critical",
+                high: "⚠ High Severity",
+                moderate: "Moderate",
+                low: "Low Risk",
+                none: "✓ Normal",
+                info: "ℹ Informational",
+            };
+            severityBadge.textContent = labels[sev] || sev;
+        }
+
+        // Predictions list
+        const listContainer = document.getElementById("predictionsListContainer");
+        if (listContainer && data.predictions) {
+            listContainer.innerHTML = "";
+            data.predictions.forEach((p, idx) => {
+                const isPrimary = idx === 0;
+                const pct = (p.probability * 100).toFixed(1);
+
+                const row = document.createElement("div");
+                row.className = `pred-row${isPrimary ? " primary" : ""}`;
+                row.innerHTML = `
+                    <div class="pred-color-dot" style="background:${p.color || "#3b82f6"};"></div>
+                    <div class="pred-label">${p.display_name || p.class_id}</div>
+                    <div class="pred-bar-container">
+                        <div class="pred-bar-fill" style="width:${pct}%; background:${p.color || "#3b82f6"};"></div>
+                    </div>
+                    <div class="pred-percent">${pct}%</div>
+                `;
+                listContainer.appendChild(row);
+            });
+        }
+
+        // Clinical context
+        const contextBox = document.getElementById("clinicalContextBox");
+        const contextText = document.getElementById("clinicalContextText");
+        const actionBox = document.getElementById("actionBox");
+        const actionText = document.getElementById("actionText");
+
+        if (data.clinical_context && contextBox) {
+            contextBox.style.display = "block";
+            if (contextText) contextText.textContent = data.clinical_context;
+
+            if (data.recommended_action && actionBox) {
+                actionBox.style.display = "block";
+                if (actionText) actionText.textContent = data.recommended_action;
+            } else if (actionBox) {
+                actionBox.style.display = "none";
+            }
+        } else if (contextBox) {
+            contextBox.style.display = "none";
+        }
+    }
+
+    function renderGradCAM(explainData) {
+        const origLayer = document.getElementById("viewerOrigImg");
+        const heatLayer = document.getElementById("viewerHeatmapImg");
+        const overlayLayer = document.getElementById("viewerOverlayImg");
+
+        if (origLayer) origLayer.src = originalDataUrl || "";
+
+        if (explainData && explainData.gradcam_overlay_base64) {
+            gradcamOverlayBase64 = explainData.gradcam_overlay_base64;
+            gradcamHeatmapBase64 = explainData.gradcam_heatmap_base64;
+
+            if (heatLayer) heatLayer.src = `data:image/png;base64,${gradcamHeatmapBase64}`;
+            if (overlayLayer) overlayLayer.src = `data:image/png;base64,${gradcamOverlayBase64}`;
+        } else {
+            // No Grad-CAM available — show original image
+            if (heatLayer) heatLayer.src = originalDataUrl || "";
+            if (overlayLayer) overlayLayer.src = originalDataUrl || "";
+        }
+
+        setViewerMode("overlay");
+    }
+
+    // ── Viewer Controls ──
+
     function setupControls() {
-        // Mode Tabs
         const tabBtns = document.querySelectorAll(".viewer-tab-btn");
         tabBtns.forEach((btn) => {
             btn.addEventListener("click", () => {
                 tabBtns.forEach((b) => b.classList.remove("active"));
                 btn.classList.add("active");
-                const mode = btn.dataset.mode;
-                setViewerMode(mode);
+                setViewerMode(btn.dataset.mode);
             });
         });
 
-        // Opacity Slider
         const opacitySlider = document.getElementById("gradcamOpacitySlider");
         const opacityVal = document.getElementById("opacityValLabel");
         if (opacitySlider) {
@@ -247,13 +530,10 @@
                 const val = e.target.value;
                 if (opacityVal) opacityVal.textContent = `${val}%`;
                 const heatLayer = document.getElementById("viewerHeatmapImg");
-                if (heatLayer) {
-                    heatLayer.style.opacity = val / 100;
-                }
+                if (heatLayer) heatLayer.style.opacity = val / 100;
             });
         }
 
-        // Zoom Controls
         const zoomIn = document.getElementById("zoomInBtn");
         const zoomOut = document.getElementById("zoomOutBtn");
         const zoomReset = document.getElementById("zoomResetBtn");

@@ -4,6 +4,11 @@
 dataset:
   xray_path: "C:\\Users\\vansh\\.cache\\kagglehub\\datasets\\paultimothymooney\\chest-xray-pneumonia\\versions\\2\\chest_xray"
   symptom_path: "C:\\Users\\vansh\\.cache\\kagglehub\\datasets\\miltonmacgyver\\symptom-based-disease-prediction-dataset\\versions\\1\\disease_prediction.csv"
+  # New image dataset paths (auto-downloaded via kagglehub if not present)
+  brain_tumor_path: ""
+  skin_cancer_path: ""
+  retinopathy_path: ""
+  blood_cell_path: ""
   
 training:
   seed: 42
@@ -19,6 +24,37 @@ image_model:
   weight_decay: 0.0001
   patience: 3  # Early stopping patience
   freeze_layers: ["conv1", "bn1", "layer1", "layer2"]
+
+# ── Advanced Image Models (per-dataset configs) ──
+image_models:
+  brain_tumor:
+    input_size: 224
+    batch_size: 32
+    epochs: 12
+    learning_rate: 0.0001
+    weight_decay: 0.0001
+    patience: 4
+  skin_cancer:
+    input_size: 224
+    batch_size: 32
+    epochs: 15
+    learning_rate: 0.00008
+    weight_decay: 0.0002
+    patience: 5
+  retinopathy:
+    input_size: 224
+    batch_size: 32
+    epochs: 12
+    learning_rate: 0.0001
+    weight_decay: 0.0001
+    patience: 4
+  blood_cell:
+    input_size: 224
+    batch_size: 32
+    epochs: 10
+    learning_rate: 0.0001
+    weight_decay: 0.0001
+    patience: 3
   
 symptom_model:
   num_classes: 3  # Malaria, Pneumonia, Typhoid

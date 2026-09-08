@@ -3,19 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MediFusion AI Image Intelligence — Deep Learning ResNet18 Chest Radiograph Analysis and Grad-CAM Explainability.">
+    <meta name="description" content="MediFusion AI Advanced Image Intelligence — Multi-disease deep learning analysis across 5 medical imaging domains with Grad-CAM explainability.">
     <title>Image Analysis Suite — MediFusion AI</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="/static/css/global.css?v=5.0">
-    <link rel="stylesheet" href="/static/css/dashboard.css?v=5.0">
-    <link rel="stylesheet" href="/static/css/components.css?v=5.0">
-    <link rel="stylesheet" href="/static/css/responsive.css?v=5.0">
+    <link rel="stylesheet" href="/static/css/global.css?v=6.0">
+    <link rel="stylesheet" href="/static/css/dashboard.css?v=6.0">
+    <link rel="stylesheet" href="/static/css/components.css?v=6.0">
+    <link rel="stylesheet" href="/static/css/responsive.css?v=6.0">
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        /* ── Model Selector Styles ── */
+        .model-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 0.6rem;
+            margin-bottom: 1.25rem;
+        }
+        .model-card {
+            position: relative;
+            padding: 0.75rem 0.65rem;
+            border-radius: 10px;
+            border: 1.5px solid var(--border-subtle);
+            background: var(--surface-elevated);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .model-card:hover {
+            border-color: var(--accent-teal);
+            background: rgba(45, 212, 191, 0.04);
+            transform: translateY(-1px);
+        }
+        .model-card.selected {
+            border-color: var(--accent-teal);
+            background: rgba(45, 212, 191, 0.08);
+            box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+        }
+        .model-card.disabled {
+            opacity: 0.45;
+            pointer-events: none;
+        }
+        .model-card-icon {
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 7px;
+            background: rgba(45, 212, 191, 0.12);
+            color: var(--accent-teal);
+            font-size: 0.9rem;
+        }
+        .model-card-title {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.25;
+        }
+        .model-card-classes {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+        .model-card-status {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+        .model-card-status.loaded { background: #22c55e; }
+        .model-card-status.not-loaded { background: #64748b; }
+
+        /* ── Advanced Results ── */
+        .severity-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .severity-critical { background: rgba(220, 38, 38, 0.15); color: #ef4444; }
+        .severity-high { background: rgba(239, 68, 68, 0.12); color: #f87171; }
+        .severity-moderate { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
+        .severity-low { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .severity-none { background: rgba(34, 197, 94, 0.12); color: #22c55e; }
+        .severity-info { background: rgba(59, 130, 246, 0.12); color: #3b82f6; }
+
+        .clinical-context-box {
+            margin-top: 1rem;
+            padding: 0.85rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-subtle);
+            background: var(--surface-elevated);
+        }
+        .clinical-context-box h4 {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        .clinical-context-box p {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+        .action-box {
+            margin-top: 0.65rem;
+            padding: 0.6rem 0.85rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--accent-teal);
+            background: rgba(45, 212, 191, 0.04);
+        }
+        .action-box p {
+            font-size: 0.74rem;
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* ── Predictions List ── */
+        .predictions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-top: 0.75rem;
+        }
+        .pred-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.65rem;
+            border-radius: 8px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+        }
+        .pred-row.primary {
+            border-color: var(--accent-teal);
+            background: rgba(45, 212, 191, 0.06);
+        }
+        .pred-color-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .pred-label {
+            font-size: 0.76rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            flex: 1;
+        }
+        .pred-bar-container {
+            flex: 2;
+            height: 6px;
+            background: rgba(100, 116, 139, 0.15);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .pred-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+        .pred-percent {
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            min-width: 42px;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
 </head>
 <body>
     <header class="site-nav" role="banner">
@@ -63,14 +234,14 @@
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                         </div>
                         <div>
-                            <h1 class="workspace-title">Radiological Vision Suite</h1>
-                            <p class="workspace-subtitle">Deep learning transfer analysis of chest radiographs with target layer Grad-CAM visual attention mapping.</p>
+                            <h1 class="workspace-title">Advanced Medical Imaging Suite</h1>
+                            <p class="workspace-subtitle">Multi-disease deep learning analysis across 5 imaging domains — Brain MRI, Chest X-Ray, Dermatology, Retinal Fundus, and Hematology — with Grad-CAM attention mapping.</p>
                         </div>
                     </div>
                     <div style="display:flex; gap:0.5rem; align-items:center;">
-                        <span class="validated-badge">
+                        <span class="validated-badge" id="modelCountBadge">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Image Validation Active</span>
+                            <span>5 Imaging Models</span>
                         </span>
                     </div>
                 </div>
@@ -80,12 +251,23 @@
             <div class="workspace-grid">
                 <!-- Left Input Panel -->
                 <div class="workspace-panel">
+                    <!-- Model Selector -->
                     <div class="panel-header">
                         <span class="panel-title">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                            <span>Radiograph Input</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                            <span>Select Imaging Model</span>
                         </span>
-                        <span class="panel-tag">ResNet18 Backbone</span>
+                    </div>
+                    <div class="model-selector-grid" id="modelSelectorGrid">
+                        <!-- Populated by JS -->
+                    </div>
+
+                    <div class="panel-header" style="margin-top:0.5rem;">
+                        <span class="panel-title">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-teal)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <span>Medical Image Input</span>
+                        </span>
+                        <span class="panel-tag" id="modelBackboneTag">ResNet18</span>
                     </div>
 
                     <!-- Dropzone -->
@@ -94,17 +276,17 @@
                             <div class="dropzone-icon-ring">
                                 <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242M12 12v9M8 17l4-4 4 4"/></svg>
                             </div>
-                            <div class="dropzone-main-text">Drag & drop chest X-ray image</div>
-                            <div class="dropzone-sub-text">DICOM, JPEG, PNG supported • Max 15MB</div>
-                            <div class="dropzone-validation-notice">
+                            <div class="dropzone-main-text" id="dropzoneMainText">Drag & drop medical image</div>
+                            <div class="dropzone-sub-text" id="dropzoneSubText">JPEG, PNG supported • Max 15MB</div>
+                            <div class="dropzone-validation-notice" id="dropzoneNotice">
                                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                                <span>Only medical chest radiographs accepted</span>
+                                <span>Select a model above to begin analysis</span>
                             </div>
                         </div>
 
                         <!-- Preview Container -->
                         <div id="previewContainer" class="preview-container" style="display:none;">
-                            <img id="previewImg" class="preview-img" alt="Chest Radiograph Preview">
+                            <img id="previewImg" class="preview-img" alt="Medical Image Preview">
                             <div class="scanner-overlay" id="imageScannerBeam" style="display:none;">
                                 <div class="scanner-beam"></div>
                             </div>
@@ -122,12 +304,12 @@
                     <div style="margin-top:1.5rem;">
                         <button id="runImageAnalysisBtn" class="btn btn-primary" style="width:100%;" disabled>
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                            <span id="imageBtnText">Analyze Radiograph</span>
+                            <span id="imageBtnText">Select a Model to Begin</span>
                         </button>
                     </div>
 
-                    <div style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border-subtle); font-size:0.78rem; color:var(--text-muted); line-height:1.6;">
-                        <strong style="color:var(--text-secondary);">Model Architecture:</strong> ResNet-18 pretrained on ImageNet, fine-tuned on 5,856 chest radiographs with weighted CrossEntropyLoss for pathology localization.
+                    <div id="modelInfoBox" style="margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--border-subtle); font-size:0.78rem; color:var(--text-muted); line-height:1.6;">
+                        <strong style="color:var(--text-secondary);">Multi-Disease Platform:</strong> 5 specialized ResNet-18 classifiers trained on curated Kaggle medical imaging datasets spanning radiology, neurology, dermatology, ophthalmology, and hematology.
                     </div>
                 </div>
 
@@ -138,8 +320,8 @@
                         <div class="empty-stage-icon">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                         </div>
-                        <h3 class="empty-stage-title">Awaiting Radiograph Upload</h3>
-                        <p class="empty-stage-desc">Upload a chest radiograph or load a test sample on the left panel to execute deep residual analysis and Grad-CAM attention rendering.</p>
+                        <h3 class="empty-stage-title">Multi-Disease Imaging Suite Ready</h3>
+                        <p class="empty-stage-desc">Select an imaging model and upload a medical image to execute deep residual analysis with clinical context and Grad-CAM attention rendering.</p>
                     </div>
 
                     <!-- Results Stage -->
@@ -148,23 +330,32 @@
                         <div class="primary-assessment-card">
                             <div class="assessment-top-row">
                                 <div>
-                                    <div class="assessment-meta-label">Primary Radiological Finding</div>
-                                    <div class="assessment-condition-title" id="imagePredCondition">PNEUMONIA</div>
-                                    <span class="badge badge-warning" id="imageStatusBadge" style="margin-top:0.4rem;">Pathology Detected</span>
+                                    <div class="assessment-meta-label" id="resultModelLabel">Brain Tumor MRI Analysis</div>
+                                    <div class="assessment-condition-title" id="imagePredCondition">—</div>
+                                    <span class="severity-badge severity-none" id="imageSeverityBadge">—</span>
                                 </div>
                                 <div class="confidence-meter-chip">
-                                    <div class="confidence-val" id="imagePredConfidence">99.2%</div>
+                                    <div class="confidence-val" id="imagePredConfidence">—</div>
                                     <div class="confidence-lbl">Model Confidence</div>
                                 </div>
                             </div>
 
-                            <!-- Probability Chart -->
-                            <div class="chart-container-box">
-                                <canvas id="imageProbabilityChart"></canvas>
+                            <!-- Predictions List -->
+                            <div class="predictions-list" id="predictionsListContainer">
+                                <!-- Populated by JS -->
                             </div>
                         </div>
 
-                        <!-- Professional Image Comparison Viewer -->
+                        <!-- Clinical Context -->
+                        <div class="clinical-context-box" id="clinicalContextBox" style="display:none;">
+                            <h4>📋 Clinical Context</h4>
+                            <p id="clinicalContextText"></p>
+                            <div class="action-box" id="actionBox" style="display:none;">
+                                <p><strong>⚡ Recommended Action:</strong> <span id="actionText"></span></p>
+                            </div>
+                        </div>
+
+                        <!-- Image Comparison Viewer (Grad-CAM) -->
                         <div class="image-viewer-card">
                             <div class="viewer-toolbar">
                                 <div style="display:flex; align-items:center; gap:0.75rem;">
@@ -187,7 +378,7 @@
 
                             <div class="viewer-stage" id="viewerStage">
                                 <div class="stage-layer">
-                                    <img id="viewerOrigImg" alt="Original Radiograph" style="display:none;">
+                                    <img id="viewerOrigImg" alt="Original Image" style="display:none;">
                                 </div>
                                 <div class="stage-layer">
                                     <img id="viewerHeatmapImg" alt="Grad-CAM Heatmap" style="display:none;">
@@ -213,15 +404,15 @@
     <footer class="site-footer">
         <div class="app-container footer-bottom">
             <div>© 2026 MediFusion AI Research Platform.</div>
-            <div>ResNet-18 Vision Model • Grad-CAM Spatial Explainability.</div>
+            <div>5 Imaging Models • ResNet-18 Architecture • Grad-CAM Spatial Explainability.</div>
         </div>
     </footer>
 
-    <script src="/static/js/api.js?v=5.0"></script>
-    <script src="/static/js/ui.js?v=5.0"></script>
-    <script src="/static/js/charts.js?v=5.0"></script>
-    <script src="/static/js/navigation.js?v=5.0"></script>
-    <script src="/static/js/image-validator.js?v=5.0"></script>
-    <script src="/static/js/image-analysis.js?v=5.0"></script>
+    <script src="/static/js/api.js?v=6.0"></script>
+    <script src="/static/js/ui.js?v=6.0"></script>
+    <script src="/static/js/charts.js?v=6.0"></script>
+    <script src="/static/js/navigation.js?v=6.0"></script>
+    <script src="/static/js/image-validator.js?v=6.0"></script>
+    <script src="/static/js/image-analysis.js?v=6.0"></script>
 </body>
 </html>

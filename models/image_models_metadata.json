@@ -1,0 +1,216 @@
+{
+    "chest_xray": {
+        "model_key": "chest_xray",
+        "title": "Chest X-Ray Analysis",
+        "subtitle": "Pneumonia Detection from Chest Radiographs",
+        "backbone": "ResNet-18",
+        "dataset_source": "Kaggle: paultimothymooney/chest-xray-pneumonia",
+        "total_images": 5856,
+        "image_type": "grayscale",
+        "icon": "lung",
+        "classes": {
+            "NORMAL": {
+                "display_name": "Normal",
+                "severity": "none",
+                "color": "#22c55e",
+                "description": "No radiological abnormality detected in the chest cavity.",
+                "action": "Routine follow-up as per clinical guidelines."
+            },
+            "PNEUMONIA": {
+                "display_name": "Pneumonia",
+                "severity": "high",
+                "color": "#ef4444",
+                "description": "Radiographic evidence of pulmonary consolidation or infiltrates consistent with pneumonia.",
+                "action": "Urgent clinical evaluation recommended. Consider sputum culture and appropriate antibiotic therapy."
+            }
+        }
+    },
+    "brain_tumor": {
+        "model_key": "brain_tumor",
+        "title": "Brain Tumor MRI Analysis",
+        "subtitle": "Intracranial Neoplasm Classification from MRI",
+        "backbone": "ResNet-18",
+        "dataset_source": "Kaggle: masoudnickparvar/brain-tumor-mri-dataset",
+        "total_images": 7023,
+        "image_type": "grayscale",
+        "icon": "brain",
+        "classes": {
+            "glioma": {
+                "display_name": "Glioma",
+                "severity": "critical",
+                "color": "#dc2626",
+                "description": "Glial cell tumor originating from astrocytes, oligodendrocytes, or ependymal cells. Most common primary brain tumor.",
+                "action": "URGENT: Immediate neurosurgical consultation. Requires histopathological grading (WHO Grade I-IV) and multidisciplinary oncology review."
+            },
+            "meningioma": {
+                "display_name": "Meningioma",
+                "severity": "high",
+                "color": "#f59e0b",
+                "description": "Tumor arising from meningeal tissues surrounding the brain. Typically slow-growing and often benign.",
+                "action": "Neurosurgical evaluation recommended. Serial MRI monitoring for growth. Surgical resection if symptomatic or growing."
+            },
+            "notumor": {
+                "display_name": "No Tumor",
+                "severity": "none",
+                "color": "#22c55e",
+                "description": "No intracranial mass lesion identified on MRI examination.",
+                "action": "Normal finding. Follow up as clinically indicated."
+            },
+            "pituitary": {
+                "display_name": "Pituitary Tumor",
+                "severity": "moderate",
+                "color": "#3b82f6",
+                "description": "Tumor of the pituitary gland (adenoma). May cause hormonal imbalances and visual field defects.",
+                "action": "Endocrinological workup recommended. Check prolactin, GH, ACTH, TSH levels. Ophthalmology referral for visual field testing."
+            }
+        }
+    },
+    "skin_cancer": {
+        "model_key": "skin_cancer",
+        "title": "Dermatological Lesion Analysis",
+        "subtitle": "Skin Cancer Classification from Dermoscopic Images",
+        "backbone": "ResNet-18",
+        "dataset_source": "Kaggle: kmader/skin-cancer-mnist-ham10000",
+        "total_images": 10015,
+        "image_type": "color",
+        "icon": "skin",
+        "classes": {
+            "akiec": {
+                "display_name": "Actinic Keratoses",
+                "severity": "moderate",
+                "color": "#f59e0b",
+                "description": "Pre-malignant lesion caused by chronic UV exposure. Considered a precursor to squamous cell carcinoma.",
+                "action": "Dermatological monitoring with possible cryotherapy, topical 5-FU, or photodynamic therapy. Sun protection essential."
+            },
+            "bcc": {
+                "display_name": "Basal Cell Carcinoma",
+                "severity": "high",
+                "color": "#ef4444",
+                "description": "Most common form of skin cancer. Locally invasive but rarely metastasizes. Appears as pearly, translucent papule.",
+                "action": "Dermatological biopsy and excision recommended. Mohs micrographic surgery for high-risk areas. Regular follow-up."
+            },
+            "bkl": {
+                "display_name": "Benign Keratosis",
+                "severity": "low",
+                "color": "#22c55e",
+                "description": "Benign epidermal growth including seborrheic keratosis, solar lentigo, and lichen planus-like keratosis.",
+                "action": "Generally no treatment required. Removal for cosmetic reasons or diagnostic confirmation if uncertain."
+            },
+            "df": {
+                "display_name": "Dermatofibroma",
+                "severity": "low",
+                "color": "#22c55e",
+                "description": "Common benign skin nodule of fibroblastic origin. Firm, dome-shaped, typically on lower extremities.",
+                "action": "No treatment necessary unless symptomatic. Biopsy if diagnostic uncertainty."
+            },
+            "mel": {
+                "display_name": "Melanoma",
+                "severity": "critical",
+                "color": "#dc2626",
+                "description": "Malignant neoplasm of melanocytes. Most dangerous form of skin cancer with significant metastatic potential.",
+                "action": "URGENT: Immediate dermatological referral. Excisional biopsy with adequate margins. Staging workup including sentinel lymph node biopsy."
+            },
+            "nv": {
+                "display_name": "Melanocytic Nevi",
+                "severity": "none",
+                "color": "#22c55e",
+                "description": "Common benign mole (nevus). Proliferation of melanocytes forming well-circumscribed lesion.",
+                "action": "Monitor for changes (ABCDE criteria). Photographic documentation for comparison. No treatment unless atypical features."
+            },
+            "vasc": {
+                "display_name": "Vascular Lesions",
+                "severity": "low",
+                "color": "#3b82f6",
+                "description": "Benign vascular proliferation including angiomas, angiokeratomas, pyogenic granulomas, and hemorrhage.",
+                "action": "Usually benign. Treatment (laser, electrocautery) if cosmetically bothersome or recurrently bleeding."
+            }
+        }
+    },
+    "retinopathy": {
+        "model_key": "retinopathy",
+        "title": "Diabetic Retinopathy Grading",
+        "subtitle": "Retinal Fundus Severity Assessment",
+        "backbone": "ResNet-18",
+        "dataset_source": "Kaggle: amanneo/diabetic-retinopathy-resized-arranged",
+        "total_images": 35126,
+        "image_type": "color",
+        "icon": "eye",
+        "classes": {
+            "No_DR": {
+                "display_name": "No DR",
+                "severity": "none",
+                "color": "#22c55e",
+                "description": "No diabetic retinopathy changes detected in the retinal fundus.",
+                "action": "Annual dilated eye examination. Continue glycemic control optimization."
+            },
+            "Mild": {
+                "display_name": "Mild NPDR",
+                "severity": "low",
+                "color": "#84cc16",
+                "description": "Mild non-proliferative diabetic retinopathy. Microaneurysms only.",
+                "action": "Ophthalmological review in 9-12 months. Optimize HbA1c, blood pressure, and lipid control."
+            },
+            "Moderate": {
+                "display_name": "Moderate NPDR",
+                "severity": "moderate",
+                "color": "#f59e0b",
+                "description": "Moderate non-proliferative diabetic retinopathy. More than just microaneurysms but less than severe NPDR.",
+                "action": "Ophthalmological review in 6-9 months. Aggressive glycemic control. Consider referral to retinal specialist."
+            },
+            "Severe": {
+                "display_name": "Severe NPDR",
+                "severity": "high",
+                "color": "#ef4444",
+                "description": "Severe non-proliferative diabetic retinopathy meeting the 4-2-1 rule criteria.",
+                "action": "Urgent retinal specialist referral. Review every 2-4 months. Anti-VEGF therapy may be indicated."
+            },
+            "Proliferate_DR": {
+                "display_name": "Proliferative DR",
+                "severity": "critical",
+                "color": "#dc2626",
+                "description": "Proliferative diabetic retinopathy with neovascularization. High risk of vitreous hemorrhage and retinal detachment.",
+                "action": "URGENT: Immediate retinal specialist referral. Panretinal photocoagulation or anti-VEGF injection indicated."
+            }
+        }
+    },
+    "blood_cell": {
+        "model_key": "blood_cell",
+        "title": "Blood Cell Classification",
+        "subtitle": "Hematological Microscopy Cell Type Identification",
+        "backbone": "ResNet-18",
+        "dataset_source": "Kaggle: paultimothymooney/blood-cells",
+        "total_images": 12500,
+        "image_type": "color",
+        "icon": "droplet",
+        "classes": {
+            "EOSINOPHIL": {
+                "display_name": "Eosinophil",
+                "severity": "info",
+                "color": "#f97316",
+                "description": "Granulocyte with bilobed nucleus and large eosinophilic granules. Elevated in allergic reactions, parasitic infections, and autoimmune conditions.",
+                "action": "Correlate with complete blood count. Elevated eosinophils may indicate allergic disorder, parasitic infection, or eosinophilic syndrome."
+            },
+            "LYMPHOCYTE": {
+                "display_name": "Lymphocyte",
+                "severity": "info",
+                "color": "#3b82f6",
+                "description": "Agranular leukocyte central to adaptive immunity. Includes T cells, B cells, and NK cells.",
+                "action": "Correlate with differential count. Lymphocytosis may indicate viral infection. Lymphopenia may suggest immunodeficiency."
+            },
+            "MONOCYTE": {
+                "display_name": "Monocyte",
+                "severity": "info",
+                "color": "#8b5cf6",
+                "description": "Largest normal leukocyte with kidney-shaped nucleus. Precursor to tissue macrophages. Role in innate immunity and phagocytosis.",
+                "action": "Correlate with clinical context. Monocytosis may indicate chronic infection, autoimmune disease, or hematological malignancy."
+            },
+            "NEUTROPHIL": {
+                "display_name": "Neutrophil",
+                "severity": "info",
+                "color": "#06b6d4",
+                "description": "Most abundant granulocyte with multi-lobed nucleus. First responder to bacterial infection and acute inflammation.",
+                "action": "Correlate with total WBC count. Neutrophilia suggests bacterial infection. Neutropenia may indicate bone marrow suppression."
+            }
+        }
+    }
+}

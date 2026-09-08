@@ -42,6 +42,7 @@ from src.data.symptom_dataset import (
 from src.models.fusion_model import UNIFIED_CLASSES
 from src.utils.image_validator import validate_chest_radiograph
 from api.general_disease import router as general_disease_router
+from api.image_routes import router as image_routes_router
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -92,6 +93,13 @@ async def add_cache_control_header(request, call_next):
     return response
 
 app.include_router(general_disease_router)
+app.include_router(image_routes_router)
+
+# Serve evaluation reports and charts (ROC curves, confusion matrices)
+reports_dir = os.path.join(project_root, "reports")
+if os.path.exists(reports_dir):
+    app.mount("/static/reports", StaticFiles(directory=reports_dir), name="reports")
+    app.mount("/reports", StaticFiles(directory=reports_dir), name="reports_direct")
 
 # Serve frontend static files and pages
 frontend_dir = os.path.join(project_root, "frontend")

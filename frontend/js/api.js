@@ -49,6 +49,15 @@ const MediFusionAPI = (function () {
         }
     }
 
+    // ── Endpoint-to-model-key mapping ──
+    const IMAGE_MODEL_ENDPOINTS = {
+        chest_xray: "/api/predict/image",
+        brain_tumor: "/api/predict/image/brain-tumor",
+        skin_cancer: "/api/predict/image/skin-cancer",
+        retinopathy: "/api/predict/image/retinopathy",
+        blood_cell: "/api/predict/image/blood-cell",
+    };
+
     return {
         /**
          * System Health & Model Telemetry
@@ -58,7 +67,7 @@ const MediFusionAPI = (function () {
         },
 
         /**
-         * Image Analysis (ResNet18)
+         * Image Analysis (ResNet18) — Original Chest X-Ray endpoint
          */
         predictImage: async function (file) {
             const formData = new FormData();
@@ -70,7 +79,25 @@ const MediFusionAPI = (function () {
         },
 
         /**
-         * Grad-CAM Explainability
+         * Advanced Image Analysis — Route to specific model endpoint
+         * @param {string} modelKey - e.g. "brain_tumor", "skin_cancer", etc.
+         * @param {File} file - Image file to analyze
+         */
+        predictImageAdvanced: async function (modelKey, file) {
+            const endpoint = IMAGE_MODEL_ENDPOINTS[modelKey];
+            if (!endpoint) {
+                throw new Error(`Unknown image model key: ${modelKey}`);
+            }
+            const formData = new FormData();
+            formData.append("file", file);
+            return request(endpoint, {
+                method: "POST",
+                body: formData,
+            }, 60000);
+        },
+
+        /**
+         * Grad-CAM Explainability — Original Chest X-Ray
          */
         explainImage: async function (file) {
             const formData = new FormData();
@@ -79,6 +106,35 @@ const MediFusionAPI = (function () {
                 method: "POST",
                 body: formData,
             });
+        },
+
+        /**
+         * Advanced Grad-CAM — For any loaded image model
+         * @param {string} modelKey - e.g. "brain_tumor", "skin_cancer", etc.
+         * @param {File} file - Image file for explanation
+         */
+        explainImageAdvanced: async function (modelKey, file) {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("model_key", modelKey);
+            return request("/api/explain/image/advanced", {
+                method: "POST",
+                body: formData,
+            }, 60000);
+        },
+
+        /**
+         * Get status of all image models (loaded/not loaded)
+         */
+        getImageModelsStatus: async function () {
+            return request("/api/image-models/status", { method: "GET" }, 8000);
+        },
+
+        /**
+         * Get clinical metadata for all image models
+         */
+        getImageModelsMetadata: async function () {
+            return request("/api/image-models/metadata", { method: "GET" }, 8000);
         },
 
         /**
@@ -153,3 +209,4 @@ const MediFusionAPI = (function () {
 
 // Export globally
 window.MediFusionAPI = MediFusionAPI;
+

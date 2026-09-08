@@ -35,7 +35,7 @@ def main():
     
     # --- Step 1: Train Image Model ---
     logger.info("\n" + "=" * 60)
-    logger.info("STEP 1/5: Training Image Model (ResNet18)")
+    logger.info("STEP 1/6: Training Image Model (ResNet18 - Chest X-Ray)")
     logger.info("=" * 60)
     try:
         from src.training.train_image import train_image_model
@@ -43,6 +43,21 @@ def main():
         logger.info(f"[OK] Image model trained. Test accuracy: {image_results['test_accuracy']:.4f}")
     except Exception as e:
         logger.error(f"[FAIL] Image model training failed: {e}", exc_info=True)
+    
+    # --- Step 1.5: Train Advanced Image Models ---
+    logger.info("\n" + "=" * 60)
+    logger.info("STEP 1.5/6: Training Advanced Image Models (Brain Tumor, Skin Cancer, Retinopathy, Blood Cell)")
+    logger.info("=" * 60)
+    try:
+        from src.training.train_multi_image import train_all_image_models
+        adv_image_results = train_all_image_models(config)
+        for key, res in adv_image_results.items():
+            if "error" not in res:
+                logger.info(f"[OK] {key} model: test acc = {res['test_accuracy']:.4f}")
+            else:
+                logger.warning(f"[SKIP] {key} model: {res['error']}")
+    except Exception as e:
+        logger.error(f"[FAIL] Advanced image model training failed: {e}", exc_info=True)
     
     # --- Step 2: Train Symptom Model ---
     logger.info("\n" + "=" * 60)
