@@ -2,8 +2,10 @@
 # Central configuration for all components
 
 dataset:
-  xray_path: "C:\\Users\\vansh\\.cache\\kagglehub\\datasets\\paultimothymooney\\chest-xray-pneumonia\\versions\\2\\chest_xray"
-  symptom_path: "C:\\Users\\vansh\\.cache\\kagglehub\\datasets\\miltonmacgyver\\symptom-based-disease-prediction-dataset\\versions\\1\\disease_prediction.csv"
+  # Paths are empty — kagglehub will auto-download from Kaggle on first run
+  # and cache them in ~/.cache/kagglehub/
+  xray_path: ""
+  symptom_path: "data/disease_prediction.csv"  # MiltonMacGyver dataset with 15 symptoms and Malaria/Pneumonia/Typhoid labels
   # New image dataset paths (auto-downloaded via kagglehub if not present)
   brain_tumor_path: ""
   skin_cancer_path: ""

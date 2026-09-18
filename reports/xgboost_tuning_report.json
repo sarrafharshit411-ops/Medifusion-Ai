@@ -1,0 +1,108 @@
+{
+  "symptom_model": {
+    "model_name": "Symptom XGBoost",
+    "best_cv_accuracy": 0.8924455569461827,
+    "best_params": {
+      "subsample": 0.7,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.1,
+      "n_estimators": 100,
+      "min_child_weight": 2,
+      "max_depth": 5,
+      "learning_rate": 0.05,
+      "gamma": 0.3,
+      "colsample_bytree": 0.6
+    },
+    "baseline_accuracy": 0.874,
+    "baseline_f1": 0.8739957994186397,
+    "tuned_accuracy": 0.877,
+    "tuned_f1": 0.8768093555327597,
+    "accuracy_delta": 0.0030000000000000027,
+    "classification_report": {
+      "Malaria": {
+        "precision": 0.8492307692307692,
+        "recall": 0.8288288288288288,
+        "f1-score": 0.8389057750759878,
+        "support": 333.0
+      },
+      "Pneumonia": {
+        "precision": 0.9069069069069069,
+        "recall": 0.9069069069069069,
+        "f1-score": 0.9069069069069069,
+        "support": 333.0
+      },
+      "Typhoid": {
+        "precision": 0.8742690058479532,
+        "recall": 0.8952095808383234,
+        "f1-score": 0.8846153846153846,
+        "support": 334.0
+      },
+      "accuracy": 0.877,
+      "macro avg": {
+        "precision": 0.8768022273285432,
+        "recall": 0.876981772191353,
+        "f1-score": 0.8768093555327597,
+        "support": 1000.0
+      },
+      "weighted avg": {
+        "precision": 0.8767996941070626,
+        "recall": 0.877,
+        "f1-score": 0.8768171615618424,
+        "support": 1000.0
+      }
+    }
+  },
+  "clinical_model": {
+    "model_name": "Clinical XGBoost",
+    "best_cv_accuracy": 0.8901946182728411,
+    "best_params": {
+      "subsample": 0.7,
+      "reg_lambda": 1.0,
+      "reg_alpha": 0.1,
+      "n_estimators": 100,
+      "min_child_weight": 2,
+      "max_depth": 5,
+      "learning_rate": 0.05,
+      "gamma": 0.3,
+      "colsample_bytree": 0.6
+    },
+    "baseline_accuracy": 0.867,
+    "baseline_f1": 0.8666894649677613,
+    "tuned_accuracy": 0.88,
+    "tuned_f1": 0.8798132735836451,
+    "accuracy_delta": 0.013000000000000012,
+    "classification_report": {
+      "Malaria": {
+        "precision": 0.852760736196319,
+        "recall": 0.8348348348348348,
+        "f1-score": 0.8437025796661608,
+        "support": 333.0
+      },
+      "Pneumonia": {
+        "precision": 0.9077380952380952,
+        "recall": 0.9159159159159159,
+        "f1-score": 0.9118086696562033,
+        "support": 333.0
+      },
+      "Typhoid": {
+        "precision": 0.878698224852071,
+        "recall": 0.8892215568862275,
+        "f1-score": 0.8839285714285714,
+        "support": 334.0
+      },
+      "accuracy": 0.88,
+      "macro avg": {
+        "precision": 0.8797323520954952,
+        "recall": 0.8799907692123261,
+        "f1-score": 0.8798132735836451,
+        "support": 1000.0
+      },
+      "weighted avg": {
+        "precision": 0.8797313179682517,
+        "recall": 0.88,
+        "f1-score": 0.8798173888814902,
+        "support": 1000.0
+      }
+    }
+  }
+}

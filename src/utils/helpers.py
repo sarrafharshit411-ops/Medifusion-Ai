@@ -37,9 +37,11 @@ def set_seed(seed: int = 42):
 
 
 def get_device() -> torch.device:
-    """Get the best available device (CUDA > CPU)."""
+    """Get the best available device (CUDA > MPS > CPU)."""
     if torch.cuda.is_available():
         return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
     return torch.device("cpu")
 
 

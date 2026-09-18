@@ -42,9 +42,12 @@ def train_symptom_model(config: dict = None) -> Dict:
     
     sym_config = config["symptom_model"]
     
-    # Load data
+    # Load data — resolve path relative to project root
+    sym_path = config["dataset"]["symptom_path"]
+    if not os.path.isabs(sym_path):
+        sym_path = os.path.join(project_root, sym_path)
     X_train, X_test, y_train, y_test, label_encoder, data_info = load_symptom_data(
-        csv_path=config["dataset"]["symptom_path"],
+        csv_path=sym_path,
         test_size=0.2,
         seed=config["training"]["seed"],
     )

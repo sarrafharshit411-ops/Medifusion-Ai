@@ -48,9 +48,12 @@ def train_clinical_model(config: dict = None) -> Dict:
     
     clin_config = config["clinical_model"]
     
-    # Load symptom data
+    # Load symptom data — resolve path relative to project root
+    sym_path = config["dataset"]["symptom_path"]
+    if not os.path.isabs(sym_path):
+        sym_path = os.path.join(project_root, sym_path)
     X_train_sym, X_test_sym, y_train, y_test, label_encoder, data_info = load_symptom_data(
-        csv_path=config["dataset"]["symptom_path"],
+        csv_path=sym_path,
         test_size=0.2,
         seed=config["training"]["seed"],
     )

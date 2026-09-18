@@ -8,6 +8,15 @@ It is NOT a definitive medical diagnostic tool.
 
 import os
 import sys
+
+# Fix macOS PyTorch+joblib deadlock — must be set before torch is imported
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+os.environ.setdefault("VECLIB_MAXIMUM_THREADS", "1")
+os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
+os.environ.setdefault("JOBLIB_MULTIPROCESSING", "0")
+
 import io
 import logging
 from contextlib import asynccontextmanager

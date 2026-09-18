@@ -19,10 +19,20 @@ from torch.optim.lr_scheduler import CosineAnnealingLR
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from src.data.xray_dataset import load_xray_data
+from src.data.dataset_downloader import resolve_dataset_path
 from src.models.image_model import ChestXRayModel
-from src.utils.helpers import load_config, set_seed, get_device, ensure_dir, save_metrics, setup_logging
+from src.utils.helpers import load_config, set_seed, ensure_dir, save_metrics, setup_logging
 
 logger = logging.getLogger(__name__)
+
+
+def get_device() -> torch.device:
+    """Get the best available device: CUDA > MPS (Apple Silicon) > CPU."""
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
 
 
 def train_one_epoch(model, loader, criterion, optimizer, device) -> Dict:
@@ -115,9 +125,10 @@ def train_image_model(config: dict = None) -> Dict:
     
     img_config = config["image_model"]
     
-    # Load data
+    # Load data — auto-download if xray_path is empty
+    xray_path = resolve_dataset_path("chest_xray", config)
     train_loader, val_loader, test_loader, data_info = load_xray_data(
-        data_root=config["dataset"]["xray_path"],
+        data_root=xray_path,
         input_size=img_config["input_size"],
         val_split=config["training"]["val_split"],
         batch_size=img_config["batch_size"],

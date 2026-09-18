@@ -130,8 +130,8 @@ def train_one_epoch(model, loader, criterion, optimizer, device) -> Dict:
     }
 
 
-def evaluate(model, loader, criterion, device) -> Dict:
-    """Evaluate model on a data loader."""
+def evaluate(model, loader, criterion, device, use_tta: bool = False) -> Dict:
+    """Evaluate model on a data loader with optional Test-Time Augmentation (TTA)."""
     model.eval()
     running_loss = 0.0
     correct = 0
@@ -143,12 +143,22 @@ def evaluate(model, loader, criterion, device) -> Dict:
     with torch.no_grad():
         for images, labels in loader:
             images, labels = images.to(device), labels.to(device)
-            logits, _ = model(images)
-            loss = criterion(logits, labels)
+            if use_tta:
+                logits1, _ = model(images)
+                logits2, _ = model(torch.flip(images, dims=[-1]))
+                logits3, _ = model(torch.flip(images, dims=[-2]))
+                probs1 = torch.softmax(logits1, dim=1)
+                probs2 = torch.softmax(logits2, dim=1)
+                probs3 = torch.softmax(logits3, dim=1)
+                probs = (probs1 + probs2 + probs3) / 3.0
+                loss = criterion(logits1, labels)
+            else:
+                logits, _ = model(images)
+                loss = criterion(logits, labels)
+                probs = torch.softmax(logits, dim=1)
 
             running_loss += loss.item() * images.size(0)
-            probs = torch.softmax(logits, dim=1)
-            _, predicted = logits.max(1)
+            _, predicted = probs.max(1)
             total += labels.size(0)
             correct += predicted.eq(labels).sum().item()
 
@@ -172,15 +182,19 @@ def train_single_image_model(
     config: dict,
     epochs: Optional[int] = None,
     learning_rate: Optional[float] = None,
+    loss_type: str = "cross_entropy",
+    use_tta: bool = False,
 ) -> Dict:
     """
-    Full training pipeline for a single image dataset.
+    Full training pipeline for a single image dataset with support for Focal Loss and TTA.
 
     Args:
         dataset_key: Key identifying the dataset (e.g., 'brain_tumor')
         config: Full application config dict
         epochs: Override epoch count (optional)
         learning_rate: Override learning rate (optional)
+        loss_type: Loss function ('cross_entropy' | 'focal' | 'label_smoothing')
+        use_tta: Enable Test-Time Augmentation on evaluation
 
     Returns:
         Dictionary with training history and final metrics.
@@ -201,7 +215,7 @@ def train_single_image_model(
     logger.info(f"")
     logger.info(f"{'─' * 60}")
     logger.info(f"Training [{dataset_key.upper()}] image model on {device}")
-    logger.info(f"  Classes: {num_classes}, Epochs: {num_epochs}, LR: {lr}")
+    logger.info(f"  Classes: {num_classes}, Epochs: {num_epochs}, LR: {lr}, Loss: {loss_type}")
     logger.info(f"{'─' * 60}")
 
     # Paths
@@ -222,9 +236,19 @@ def train_single_image_model(
     )
     model.to(device)
 
-    # Loss with class weights for imbalance
+    # Loss selection
     class_weights = data_info["class_weights"].to(device)
-    criterion = nn.CrossEntropyLoss(weight=class_weights)
+    if loss_type == "focal":
+        from src.models.focal_loss import FocalLoss
+        criterion = FocalLoss(gamma=2.0, weight=class_weights)
+        logger.info("  Loss Function: FocalLoss (gamma=2.0, class-weighted)")
+    elif loss_type == "label_smoothing":
+        from src.models.focal_loss import LabelSmoothingCrossEntropy
+        criterion = LabelSmoothingCrossEntropy(smoothing=0.1, weight=class_weights)
+        logger.info("  Loss Function: LabelSmoothingCrossEntropy (smoothing=0.1)")
+    else:
+        criterion = nn.CrossEntropyLoss(weight=class_weights)
+        logger.info("  Loss Function: CrossEntropyLoss (class-weighted)")
 
     # Optimizer (only trainable params)
     optimizer = optim.AdamW(
@@ -284,9 +308,9 @@ def train_single_image_model(
     model.load_state_dict(
         torch.load(os.path.join(models_dir, model_filename), map_location=device, weights_only=True)
     )
-    test_metrics = evaluate(model, test_loader, criterion, device)
+    test_metrics = evaluate(model, test_loader, criterion, device, use_tta=use_tta)
 
-    logger.info(f"[{dataset_key}] Test Accuracy: {test_metrics['accuracy']:.4f}")
+    logger.info(f"[{dataset_key}] Test Accuracy{' (with TTA)' if use_tta else ''}: {test_metrics['accuracy']:.4f}")
 
     # Save metrics
     results = {
@@ -372,19 +396,34 @@ def main():
     )
     parser.add_argument("--epochs", type=int, default=None, help="Override epoch count")
     parser.add_argument("--lr", type=float, default=None, help="Override learning rate")
+    parser.add_argument("--focal", action="store_true", help="Use Focal Loss for severe class imbalance")
+    parser.add_argument("--label-smoothing", action="store_true", help="Use Label Smoothing CrossEntropy")
+    parser.add_argument("--tta", action="store_true", help="Use Test-Time Augmentation on evaluation")
     args = parser.parse_args()
 
     setup_logging()
     project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     config = load_config(os.path.join(project_root, "configs", "config.yaml"))
 
+    loss_type = "cross_entropy"
+    if args.focal:
+        loss_type = "focal"
+    elif args.label_smoothing:
+        loss_type = "label_smoothing"
+
     if args.all:
         train_all_image_models(config)
     elif args.dataset:
-        train_single_image_model(args.dataset, config, epochs=args.epochs, learning_rate=args.lr)
+        train_single_image_model(
+            args.dataset, config,
+            epochs=args.epochs,
+            learning_rate=args.lr,
+            loss_type=loss_type,
+            use_tta=args.tta,
+        )
     else:
         parser.print_help()
-        print("\nExample: python -m src.training.train_multi_image --dataset brain_tumor")
+        print("\nExample: python -m src.training.train_multi_image --dataset brain_tumor --focal --tta")
 
 
 if __name__ == "__main__":

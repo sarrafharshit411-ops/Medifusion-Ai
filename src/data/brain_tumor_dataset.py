@@ -32,12 +32,12 @@ def get_train_transforms(input_size: int = 224) -> transforms.Compose:
         transforms.RandomRotation(degrees=15),
         transforms.RandomAffine(degrees=0, translate=(0.05, 0.05), scale=(0.95, 1.05)),
         transforms.ColorJitter(brightness=0.15, contrast=0.15),
-        transforms.RandomErasing(p=0.1, scale=(0.02, 0.08)),
         transforms.ToTensor(),
         transforms.Normalize(
             mean=[0.485, 0.456, 0.406],
             std=[0.229, 0.224, 0.225]
         ),
+        transforms.RandomErasing(p=0.1, scale=(0.02, 0.08)),
     ])
 
 

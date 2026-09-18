@@ -35,6 +35,7 @@ from src.models.fusion_model import (
     UNIFIED_CLASSES, NUM_UNIFIED_CLASSES,
 )
 from src.utils.helpers import load_config, set_seed, get_device, ensure_dir, save_metrics, setup_logging
+from src.data.dataset_downloader import resolve_dataset_path
 
 logger = logging.getLogger(__name__)
 
@@ -57,18 +58,19 @@ def generate_fusion_data(config: dict, device: torch.device):
     )
     image_model.to(device)
     image_model.eval()
-    
+
+    xray_root = resolve_dataset_path("chest_xray", config)
     _, _, test_loader, data_info = load_xray_data(
-        data_root=config["dataset"]["xray_path"],
+        data_root=xray_root,
         input_size=config["image_model"]["input_size"],
         val_split=config["training"]["val_split"],
         batch_size=config["image_model"]["batch_size"],
         seed=config["training"]["seed"],
     )
-    
+
     # Extract embeddings from training data
     train_loader, _, _, _ = load_xray_data(
-        data_root=config["dataset"]["xray_path"],
+        data_root=xray_root,
         input_size=config["image_model"]["input_size"],
         val_split=0.0001,  # Use almost all for embedding extraction
         batch_size=config["image_model"]["batch_size"],
@@ -90,8 +92,11 @@ def generate_fusion_data(config: dict, device: torch.device):
     logger.info(f"Extracted {len(image_embeddings)} image embeddings")
     
     # --- Symptom data ---
+    sym_path = config["dataset"]["symptom_path"]
+    if not os.path.isabs(sym_path):
+        sym_path = os.path.join(project_root, sym_path)
     X_train_sym, X_test_sym, y_train_sym, y_test_sym, le, sym_info = load_symptom_data(
-        csv_path=config["dataset"]["symptom_path"],
+        csv_path=sym_path,
         test_size=0.2,
         seed=config["training"]["seed"],
     )

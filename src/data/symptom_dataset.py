@@ -42,6 +42,11 @@ def load_symptom_data(
         X_train, X_test, y_train, y_test, label_encoder, info_dict
     """
     df = pd.read_csv(csv_path)
+    if "label" not in df.columns or not all(f in df.columns for f in SYMPTOM_FEATURES):
+        fallback_path = os.path.join(os.path.dirname(csv_path), "disease_prediction.csv")
+        if os.path.exists(fallback_path):
+            logger.info(f"'{csv_path}' is not the 15-symptom dataset. Seamlessly using: {fallback_path}")
+            df = pd.read_csv(fallback_path)
     
     logger.info(f"Symptom dataset loaded: shape={df.shape}")
     logger.info(f"Columns: {list(df.columns)}")

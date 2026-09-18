@@ -4,12 +4,23 @@ Loads all trained models once at startup for the API.
 """
 
 import os
+
+# Fix macOS deadlock: PyTorch initializes OpenMP/MKL threads, then joblib's
+# loky/fork backend deadlocks on macOS. Force single-threaded mode before
+# any heavy imports to prevent this.
+os.environ.setdefault("OMP_NUM_THREADS", "1")
+os.environ.setdefault("MKL_NUM_THREADS", "1")
+os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
+os.environ.setdefault("VECLIB_MAXIMUM_THREADS", "1")
+os.environ.setdefault("NUMEXPR_NUM_THREADS", "1")
+os.environ.setdefault("JOBLIB_MULTIPROCESSING", "0")
+
 import json
 import logging
 from typing import Dict, Optional
 
-import torch
 import joblib
+import torch
 
 logger = logging.getLogger(__name__)
 
@@ -70,14 +81,22 @@ class ModelRegistry:
         return self._image_models_loaded.get(dataset_key, False)
     
     def load_all(self, models_dir: str):
-        """Load all available models from the models directory."""
+        """Load all available models from the models directory.
+        
+        IMPORTANT: joblib (XGBoost/sklearn) models are loaded BEFORE PyTorch
+        models to avoid a macOS deadlock where PyTorch's OpenMP thread pool
+        blocks joblib's loky/fork backend from spawning workers.
+        """
         logger.info(f"Loading models from {models_dir}...")
         
-        self._load_image_model(models_dir)
+        # Load joblib-based models first (before PyTorch inits its thread pool)
         self._load_symptom_model(models_dir)
         self._load_clinical_model(models_dir)
-        self._load_fusion_model(models_dir)
         self._load_general_disease_model(models_dir)
+        
+        # Load PyTorch-based models after
+        self._load_image_model(models_dir)
+        self._load_fusion_model(models_dir)
         self._load_advanced_image_models(models_dir)
         self._load_image_models_metadata(models_dir)
         
