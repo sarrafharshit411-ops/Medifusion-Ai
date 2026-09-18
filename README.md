@@ -163,7 +163,7 @@ MediFusion AI is built on a modular tri-stream deep learning architecture that f
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/VanshMalhotra1301/Medifusion-Ai.git
+git clone https://github.com/sarrafharshit411-ops/Medifusion-Ai.git
 cd Medifusion-Ai
 ```
 
@@ -233,8 +233,8 @@ All evaluation reports and metrics are strictly calculated from validated test p
 
 ## 👤 Author & Acknowledgements
 
-- **Developer:** [Vansh Malhotra](https://github.com/VanshMalhotra1301)
-- **Repository:** [https://github.com/VanshMalhotra1301/Medifusion-Ai.git](https://github.com/VanshMalhotra1301/Medifusion-Ai.git)
+- **Developer:** [Harshit Raj](https://github.com/sarrafharshit411-ops)
+- **Repository:** [https://github.com/sarrafharshit411-ops/Medifusion-Ai](https://github.com/sarrafharshit411-ops/Medifusion-Ai)
 - **Datasets:**
   - *Chest X-Ray Images (Pneumonia)* by Paul Mooney (Kaggle)
   - *Disease Symptom Prediction Dataset* (Kaggle)
